@@ -4,25 +4,29 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/home">Test page</router-link> |
       <router-link to="/about">About</router-link>
-      <button @click.stop="logout">Logout</button>
-      <button @click.stop="login">Login</button>
+      <button @click="logout" v-if="store.isLoggedIn">
+        Logout 
+      </button>
+      <button @click="login" v-if="!store.isLoggedIn">
+        Login
+      </button>
     </nav>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
 import { useStore } from '../store/index'
+import {  onMounted } from 'vue'
 import router from '../router'
 
-  
 const store = useStore()
+// const isLoggedIn = ref('isLoggedIn')
 function logout() {
   store.logout()
   store.checkLoggedInStatus();
 }
-function login(){
-    router.push('home')
+function login() {
+  router.push('login')
 }
 
 onMounted(() => {

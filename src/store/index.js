@@ -7,6 +7,9 @@ export const useStore = defineStore("main", {
         isLoggedIn:false
     }),
     getters: {
+      getLoginState(state){
+        return state.isLoggedIn
+      }
     },
     actions: {
       checkLoggedInStatus(){
