@@ -15,7 +15,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 //import users store
-import { useUserStore } from "../store/index";
+import { useUserStore } from "../store/userexample";
 // declare store variable
 const store = useUserStore();
 

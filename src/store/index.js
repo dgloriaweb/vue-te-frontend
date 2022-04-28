@@ -1,33 +1,22 @@
 //stores/users.js
 
 import { defineStore } from 'pinia'
-// Import axios to make HTTP requests
-import axios from "axios"
-export const useUserStore = defineStore("user", {
+// always rename the defineStore because it can cause disambiguity if names are the same
+export const useStore = defineStore("main", {
     state: () => ({
-        users: [],
         isLoggedIn:false
     }),
     getters: {
-      getUsers(state){
-          return state.users
-        }
     },
     actions: {
-      async fetchUsers() {
-        try {
-          const data = await axios.get('https://jsonplaceholder.typicode.com/users')
-            this.users = data.data
-          }
-          catch (error) {
-            alert(error)
-            console.log(error)
-        }
-      },
       checkLoggedInStatus(){
         if ( localStorage.getItem('user')){
           this.isLoggedIn = true
         }
+      },
+      logout(){
+        localStorage.removeItem('user')
+        this.isLoggedIn = false
       }
     },
 })
