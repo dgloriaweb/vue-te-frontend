@@ -1,5 +1,4 @@
 <template>
-  <flash :flashMessage="flashMessage" :flashMessageType="flashMessageType" />
   <h1>List of Recommended Jobs</h1>
   <div id="myGridContainer">
     <div id="myGridColumn" v-if="match_rates">
@@ -155,116 +154,95 @@
           <br />
         </div>
 
-        <button @click="updatePerson()">Store settings</button>
+        <button @click="updatePerson(personUpdated)">Store settings</button>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import jobService from '../services/job.service'
-import flash from '../components/FlashMessage.vue'
 import axios from 'axios'
+import {  onMounted } from 'vue'
+import { useStore } from '../store/index'
+const store = useStore()
 
-export default {
+var match_rates = null
+var content = null
+var person = null
+var personUpdated = null
+var access_token = store.getAccessToken
+var userId = store.getUserId
 
-  components: {
-    flash
-  },
-  data() {
-    return {
-      selected: true,
-      successful: false,
-      match_rates: null,
-      content: null,
-      person: null,
-      personUpdated: null,
-     
-      flashMessage: null,
-      flashMessageType: 'success',
+function fetchData() {
 
-    }
-  },
-  created() {
-    this.fetchData()
+  jobService.getMyJobs().then(
+    (response) => {
+      content = response
+      match_rates = content.data.all_job_match_rates
+      person = response.data.person
+      //take result and make a copy to use in the template, so that it can be compared if any changes.
+      personUpdated = JSON.parse(JSON.stringify(response.data.person)) //original api values
+      console.log(personUpdated);
+      console.log(person);
 
-  },
-  methods: {
-    fetchData() {
-      //reset flash message class
-      setTimeout(() => {
-        this.flashMessage = ""
-        this.flashMessageType = "success"
-      }, 3000)
-
-      jobService.getMyJobs().then(
-        (response) => {
-          this.content = response
-          this.match_rates = this.content.data.all_job_match_rates
-          this.personUpdated = response.data.person
-          //take result and make a copy to use in the template, so that it can be compared if any changes.
-
-          this.person = JSON.parse(JSON.stringify(response.data.person)) //original api values
-
-          // ** change all numeric values to true or false would make errors in id fields. Exclude these.
-          // this results an array like ['nightshift_only', 0]
-          Object.entries(this.personUpdated).forEach((entry) => {
-            if (entry[0] == "user_id" || entry[0] == "id") {
-              return
-            }
-            else {
-              this.personUpdated[entry[0]] = (entry[1] == 1) ? true : false
-            }
-          })
-        })
-        .catch(error => {
-          if (this.content == "Network error") {
-            this.flashMessage = "API server error"
-            this.flashMessageType = "danger hide"
-          }
-          else if (this.content == "401") {
-            this.flashMessage = "Unauthenticated"
-            this.flashMessageType = "danger hide"
-          }
-          else {
-            this.flashMessage = error.toString()
-            this.flashMessageType = "danger hide"
-          }
-        })
-    },
-
-    updatePerson() {
-      async (person) => {
-        var storageItem = localStorage.getItem('user')
-        this.access_token = JSON.parse(storageItem)['token']
-        this.userId = JSON.parse(storageItem)['userId']
-        if (this.access_token) {
-          try {
-            const url = process.env.VUE_APP_API_URL + '/api/people/' + person.id
-            const response = await axios.post(url, {
-              headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                Authorization: 'Bearer ' + this.access_token
-              },
-              params: {
-                userId: this.userId,
-                person,
-              },
-            })
-            return response
-
-          } catch (error) {
-            console.log(error)
-          }
-        } else {
-          console.log('no token, relogin.')
+      // // ** change all numeric values to true or false would make errors in id fields. Exclude these.
+      // // this results an array like ['nightshift_only', 0]
+      Object.entries(personUpdated).forEach((entry) => {
+        if (entry[0] == "user_id" || entry[0] == "id") {
+          return
         }
+        else {
+          personUpdated[entry[0]] = (entry[1] == 1) ? true : false
+        }
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
+}
 
+function updatePerson(personUpdated) {
+  async () => {
+    // var storageItem = localStorage.getItem('user')
+    // access_token = JSON.parse(storageItem)['token']
+    // userId = JSON.parse(storageItem)['userId']
+  // these go into the store
+
+
+
+    if (access_token) {
+      try {
+        const url = process.env.VUE_APP_API_URL + '/api/people/' + personUpdated.id
+        const response = await axios.post(url, {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + access_token
+          },
+          params: {
+            userId: userId,
+            personUpdated,
+          },
+        })
+        return response
+
+      } catch (error) {
+        console.log(error)
       }
+    } else {
+      console.log('no token, relogin.')
     }
+
   }
 }
+
+onMounted(() => {
+  fetchData()
+
+})
+
+
 </script>
 
 <style  scoped>
