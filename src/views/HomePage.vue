@@ -168,7 +168,7 @@ import flash from '../components/FlashMessage.vue'
 // import axios from "axios"
 
 export default {
-  name: "homePage",
+
   components: {
     flash
   },

@@ -5,6 +5,7 @@
       <router-link to="/about">About</router-link>
       <button @click="logout" v-if="store.isLoggedIn">Logout</button>
       <button @click="login" v-if="!store.isLoggedIn">Login</button>
+      <button @click="register" v-if="!store.isLoggedIn">Register</button>
     </nav>
   </div>
 </template>
@@ -23,6 +24,9 @@ function logout() {
 }
 function login() {
   router.push('/login')
+}
+function register() {
+  router.push('/register')
 }
 
 onMounted(() => {

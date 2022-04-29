@@ -28,7 +28,6 @@ var password = ref('password')
 
 // methods
 function handleLogin() {
-
   const headers = {
     grant_type: 'client_credentials',
     client_id: process.env.VUE_APP_CLIENT_ID,
