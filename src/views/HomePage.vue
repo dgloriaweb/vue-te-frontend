@@ -7,7 +7,7 @@
       <div id="ratesContainer">
         <div v-for="job in match_rates" :key="job.id" id="myGridRow">
           <div class="grid-cell-1">
-            <router-link :to="{ name: 'Job Detail', params: { id: job.id } }">{{
+            <router-link :to="{ name: 'jobDetail', params: { id: job.id } }">{{
               job.job_name
             }}</router-link>
           </div>
@@ -168,7 +168,7 @@ import flash from '../components/FlashMessage.vue'
 // import axios from "axios"
 
 export default {
-  name: "HomePage",
+  name: "homePage",
   components: {
     flash
   },
@@ -312,26 +312,5 @@ export default {
 </script>
 
 <style  scoped>
-#myGridContainer {
-  width: fit-content;
-  display: flex;
-  gap: 35px;
-}
-#myGridColumn {
-  padding: 15px;
-}
-#myGridRow {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  padding: 10px;
-}
-.grid-cell-1 {
-  width: max-content;
-}
-.grid-cell-2 {
-  text-align: right;
-}
-.grid-cell-2:after {
-  content: "%";
-}
+
 </style>

@@ -1,0 +1,22 @@
+#myGridContainer {
+    width: fit-content;
+    display: flex;
+    gap: 35px;
+  }
+  #myGridColumn {
+    padding: 15px;
+  }
+  #myGridRow {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    padding: 10px;
+  }
+  .grid-cell-1 {
+    width: max-content;
+  }
+  .grid-cell-2 {
+    text-align: right;
+  }
+  .grid-cell-2:after {
+    content: "%";
+  }
