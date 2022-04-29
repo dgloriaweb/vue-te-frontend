@@ -155,7 +155,7 @@
           <br />
         </div>
 
-        <button @click="confirmPersonSettingChanges()">Store settings</button>
+        <button @click="updatePerson()">Store settings</button>
       </div>
     </div>
   </div>
@@ -163,9 +163,8 @@
 
 <script>
 import jobService from '../services/job.service'
-import personService from '../services/person.service'
 import flash from '../components/FlashMessage.vue'
-// import axios from "axios"
+import axios from 'axios'
 
 export default {
 
@@ -180,10 +179,7 @@ export default {
       content: null,
       person: null,
       personUpdated: null,
-      isDirty: {
-        workplace: false,
-        remote: false,
-      },
+     
       flashMessage: null,
       flashMessageType: 'success',
 
@@ -236,81 +232,40 @@ export default {
           }
         })
     },
-    clearDirty() {
-      Object.keys(this.isDirty).forEach((value) => {
-        this.isDirty[value] = false
-      })
 
-    },
-    checkClicked(e) {
-      this.$nextTick(() => {
-        //check if the status of this checkbox is the same as the person data
-        //if it is, and class is applied, remove it
-        var chkboxName = e.srcElement.name
+    updatePerson() {
+      async (person) => {
+        var storageItem = localStorage.getItem('user')
+        this.access_token = JSON.parse(storageItem)['token']
+        this.userId = JSON.parse(storageItem)['userId']
+        if (this.access_token) {
+          try {
+            const url = process.env.VUE_APP_API_URL + '/api/people/' + person.id
+            const response = await axios.post(url, {
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: 'Bearer ' + this.access_token
+              },
+              params: {
+                userId: this.userId,
+                person,
+              },
+            })
+            return response
 
-        // mark with color if different than array value
-        if (e.srcElement.checked == this.person.workplace) {
-          this.isDirty[chkboxName] = false
+          } catch (error) {
+            console.log(error)
+          }
+        } else {
+          console.log('no token, relogin.')
         }
-        //if it's not, then let's change the class of the checkbox
-        else {
-          this.isDirty[chkboxName] = true
-        }
-        // var selection = (e.srcElement.value == "on") ? 1 : 0
-        // //make a copy of the person array and add changes to it
-        // //TODO folyt kov innen, objectben itemet felulirni. 
-        // console.log(this.personUpdated);
-        // this.personUpdated == null ? (this.personUpdated = this.person) : (this.personUpdated[chkboxName] = selection)
-      })
-    },
-    confirmPersonSettingChanges() {
-      // show a modal
-      // show list of dirty fields
-      // var myresultObject = Object.keys(this.isDirty).filter((value) => this.isDirty[value] == true)
 
-      // if (myresultObject.length == 0) {
-      // alert('no changes.')
-      // } else {
-      //TODO replace with designed modal
-      // var confirmChanges = confirm("Do you want to save these changes: \n\n")
-      // if (confirmChanges) {
-      // use service to alter person data
-      this.storePersonData()
-
-      // }
-      // }
-    },
-    storePersonData() {
-      // change every true and false back to 0  and 1 
-
-      personService.updatePerson(this.personUpdated).then(
-        (response) => {
-          if (response.status == 223) {
-            console.log(response.status)
-            this.flashMessage = 'This setup is not permitted.'
-            this.flashMessageType = "danger hide"
-          }
-          else if (response.status != 200) {
-            this.flashMessage = 'Unhandled error in home.'
-            this.flashMessageType = "danger hide"
-          }
-          else {
-            this.flashMessage = "data updated successfully"
-            this.flashMessageType = "success hide"
-          }
-          this.fetchData()
-          this.clearDirty()
-        })
-        .catch(error => {
-          // this.error = error?.response?.data?.message ?? error.message ?? error
-          this.flashMessage = error
-          this.flashMessageType = "danger hide"
-        })
+      }
     }
-  },
+  }
 }
 </script>
 
 <style  scoped>
-
 </style>
