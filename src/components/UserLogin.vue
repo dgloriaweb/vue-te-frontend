@@ -42,16 +42,19 @@ function handleLogin() {
     .post(process.env.VUE_APP_API_URL + '/api/login', headers)
     .then((response) => {
       if (response.data.token) {
+        alert("login successful")
         localStorage.setItem('user', JSON.stringify(response.data))
       }
-      console.log('token saved')
       store.checkLoggedInStatus();
       jobStore.getJobSummaryData()
       router.push('/')
-
     })
     .catch((error) => {
-      return error.response
+      if (error.response.data.errors) {
+        alert(error.response.data.errors);
+      } else {
+        console.log('unhandled error');
+      }
     })
 }
 </script>

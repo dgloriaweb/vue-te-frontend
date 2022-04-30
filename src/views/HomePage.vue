@@ -174,11 +174,24 @@ function confirmPersonSettingChanges() {
 function storePersonData() {
   personService.updatePerson(jobStore.personUpdated).then(
     (response) => {
-      console.log(response)
+      if (response.status == 223) {
+        alert(response.data)
+      }
+      else if (response.status != 200) {
+        alert('unhandled error');
+      }
+      else{
+        alert ('settings updated')
+      }
       jobStore.getJobSummaryData() // this might not even be required...
+
     })
     .catch(error => {
-      console.log(error);
+      if (error.response.data.errors) {
+        alert(error.response.data.errors);
+      } else {
+        alert('unhandled error');
+      }
     })
 }
 

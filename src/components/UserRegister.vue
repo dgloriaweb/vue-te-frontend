@@ -18,7 +18,11 @@
     <div>
       <label for="password_confirmation">Confirm Password</label>
       <br />
-      <input name="password_confirmation" type="password" v-model="password_confirmation" />
+      <input
+        name="password_confirmation"
+        type="password"
+        v-model="password_confirmation"
+      />
     </div>
     <button @click="register">Sign Up</button>
   </div>
@@ -52,14 +56,24 @@ function register() {
   return axios
     .post(process.env.VUE_APP_API_URL + '/api/register', headers)
     .then((response) => {
-      console.log(response);
+
+      if (response.status == 200) {
+        alert("registration successful")
+        this.$router.push('/')
+      } else {
+        alert(response.data.errors);
+      }
       store.checkLoggedInStatus();
       // successful = true
       router.push('/')
-
     })
     .catch((error) => {
-      return error.response
+      if(error.response.data.errors){
+        alert(error.response.data.errors);
+      } else {
+        console.log('unhandled error');
+      }
+
     })
 }
 </script>

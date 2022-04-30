@@ -12,7 +12,7 @@ class PersonService {
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
-            Authorization: 'Bearer ' + this.access_token
+            Authorization: 'Bearer ' + this.access_token,
           },
           params: {
             userId: this.userId,
@@ -20,7 +20,6 @@ class PersonService {
           },
         })
         return response
-        
       } catch (error) {
         console.log(error)
       }
