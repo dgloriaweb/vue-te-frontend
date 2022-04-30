@@ -167,7 +167,7 @@ const jobStore = useJobStore()
 var isDirty = []
 
 function confirmPersonSettingChanges() {
-  console.log(jobStore.personUpdated);
+  // validation here
   storePersonData()
 }
 
@@ -175,7 +175,7 @@ function storePersonData() {
   personService.updatePerson(jobStore.personUpdated).then(
     (response) => {
       console.log(response)
-      jobStore.getJobSummaryData()
+      jobStore.getJobSummaryData() // this might not even be required...
     })
     .catch(error => {
       console.log(error);
