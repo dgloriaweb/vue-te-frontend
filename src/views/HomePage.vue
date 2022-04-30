@@ -165,6 +165,10 @@ import { useJobStore } from '../store/jobstore'
 const jobStore = useJobStore()
 var isDirty = []
 
+function confirmPersonSettingChanges(){
+  console.log('clicked');
+}
+
 </script>
 
 <style scoped>
