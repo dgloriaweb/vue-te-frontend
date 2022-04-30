@@ -18,9 +18,11 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useStore } from '../store/index'
+import { useJobStore } from '../store/jobstore'
 import router from '../router'
 
 const store = useStore()
+const jobStore = useJobStore()
 
 // data
 var email = ref('email')
@@ -44,7 +46,7 @@ function handleLogin() {
       }
       console.log('token saved')
       store.checkLoggedInStatus();
-      // return response.data
+      jobStore.getJobSummaryData()
       router.push('/')
 
     })

@@ -6,8 +6,8 @@ import jobService from '../services/job.service'
 // always rename the defineStore because it can cause disambiguity if names are the same
 export const useJobStore = defineStore('jobs', {
   state: () => ({
-      match_rates:null,
-      personUpdated:null
+    match_rates: null,
+    personUpdated: null,
   }),
   getters: {
     // getMatchRates(state) {
@@ -32,7 +32,7 @@ export const useJobStore = defineStore('jobs', {
             if (entry[0] == 'user_id' || entry[0] == 'id') {
               return
             } else {
-                this.personUpdated[entry[0]] = entry[1] == 1 ? true : false
+              this.personUpdated[entry[0]] = entry[1] == 1 ? true : false
             }
           })
         })

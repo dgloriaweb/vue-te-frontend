@@ -6,7 +6,7 @@ export const useStore = defineStore('main', {
   state: () => ({
     isLoggedIn: false,
     userId: null,
-    access_token:null
+    access_token: null,
   }),
   getters: {
     getLoginState(state) {
@@ -28,7 +28,7 @@ export const useStore = defineStore('main', {
         // setup user id and token
         this.userId = JSON.parse(storedUser)['userId']
         this.access_token = JSON.parse(storedUser)['token']
-        if(this.access_token){
+        if (this.access_token) {
           this.isLoggedIn = true
         }
       }

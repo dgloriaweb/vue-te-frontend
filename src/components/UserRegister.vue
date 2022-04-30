@@ -18,7 +18,11 @@
     <div>
       <label for="password_confirmation">Confirm Password</label>
       <br />
-      <input name="password_confirmation" type="password" v-model="password_confirmation" />
+      <input
+        name="password_confirmation"
+        type="password"
+        v-model="password_confirmation"
+      />
     </div>
     <button @click="register">Sign Up</button>
   </div>
@@ -28,9 +32,10 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useStore } from '../store/index'
+import { useJobStore } from '../store/jobstore'
 import router from '../router'
 const store = useStore()
-
+const jobStore = useJobStore()
 
 // data
 var name = ref('name')
@@ -54,7 +59,7 @@ function register() {
     .then((response) => {
       console.log(response);
       store.checkLoggedInStatus();
-      // successful = true
+      jobStore.getJobSummaryData()
       router.push('/')
 
     })
