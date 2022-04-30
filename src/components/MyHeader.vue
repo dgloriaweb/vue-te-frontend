@@ -12,10 +12,13 @@
 
 <script setup>
 import { useStore } from '../store/index'
+import { useJobStore } from '../store/jobstore'
 import { onMounted } from 'vue'
 import router from '../router'
 
+
 const store = useStore()
+const jobStore = useJobStore()
 // const isLoggedIn = ref('isLoggedIn')
 function logout() {
   store.logout()
@@ -31,6 +34,7 @@ function register() {
 
 onMounted(() => {
   store.checkLoggedInStatus();
+  jobStore.getJobSummaryData()
 })
 
 </script>
