@@ -21,7 +21,7 @@
       <div id="settingsContainer">
         <div class="grid-cell-1">
           <h3>Usual work location</h3>
-          
+
           <input
             :myClass="{ 'red-text': isDirty['workplace'] }"
             type="checkbox"
@@ -157,16 +157,29 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup>
 import { useJobStore } from '../store/jobstore'
+import personService from '../services/person.service'
+
 const jobStore = useJobStore()
 var isDirty = []
 
-function confirmPersonSettingChanges(){
-  console.log('clicked');
+function confirmPersonSettingChanges() {
+  console.log(jobStore.personUpdated);
+  storePersonData()
+}
+
+function storePersonData() {
+  personService.updatePerson(jobStore.personUpdated).then(
+    (response) => {
+      console.log(response)
+      jobStore.getJobSummaryData()
+    })
+    .catch(error => {
+      console.log(error);
+    })
 }
 
 </script>
