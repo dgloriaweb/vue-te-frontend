@@ -6,11 +6,11 @@ class JobService {
     try {
       const url = process.env.VUE_APP_API_URL + '/api/jobs/' + job_id
       const response = await axios.get(url, {
-        headers: authService.getToken,
+        headers: authService.getApiHeaders(),
       })
       return response
     } catch (error) {
-      console.log(error)
+      alert('error getting job details: '. error)
     }
   }
 }

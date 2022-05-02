@@ -28,7 +28,6 @@ function handleLogin() {
     email : email.value,
     password : password.value
   }
-  console.log(user);
   authService.login(user)
 }
 </script>

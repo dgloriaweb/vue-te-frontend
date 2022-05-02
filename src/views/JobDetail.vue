@@ -63,12 +63,10 @@ export default {
       jobService.getJobDetails(this.$route.params.id).then(
         (response) => {
           this.job = response.data
-          console.log(this.job)
         },
         (error) => {
-          console.log(error)
-          this.error =
-            error?.response?.data?.message || error.message
+          alert(error)
+          
         }
       )
     }

@@ -44,12 +44,10 @@ export const useJobStore = defineStore('jobs', {
         })
         .catch((error) => {
           // TODO: make these generic for most requests
-          console.log(error)
+          alert('error in setJobSummaryData: '.error)
           if (error.toString().includes('Network Error')) {
-            console.log('Network Error')
             return 'Network error'
           } else if (error.toString().includes('401')) {
-            console.log('401')
             return '401'
           } else {
             return error
