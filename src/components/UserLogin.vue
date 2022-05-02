@@ -46,7 +46,8 @@ function handleLogin() {
         var userCredentials = JSON.stringify(response.data)
         store.setUserInLocalStore(userCredentials)
       }
-      jobStore.getJobSummaryData()
+      store.setLoggedInStatus()
+      jobStore.setJobSummaryData()
       router.push('/')
     })
     .catch((error) => {

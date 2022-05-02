@@ -19,7 +19,7 @@ export const useJobStore = defineStore('jobs', {
     //   },
   },
   actions: {
-    getJobSummaryData() {
+    setJobSummaryData() {
       const store = useStore()
       const url = process.env.VUE_APP_API_URL + '/api/home'
 
@@ -33,8 +33,6 @@ export const useJobStore = defineStore('jobs', {
         .then((response) => {
           this.match_rates = response.data.all_job_match_rates
           this.personUpdated = response.data.person
-          //take result and make a copy to use in the template, so that it can be compared if any changes.
-          // person = JSON.parse(JSON.stringify(response.data.person)) //original api values
           // ** change all numeric values to true or false would make errors in id fields. Exclude these.
           // this results an array like ['nightshift_only', 0]
           Object.entries(this.personUpdated).forEach((entry) => {
@@ -46,7 +44,17 @@ export const useJobStore = defineStore('jobs', {
           })
         })
         .catch((error) => {
+          // TODO: make these generic for most requests
           console.log(error)
+          if (error.toString().includes('Network Error')) {
+            console.log('Network Error')
+            return 'Network error'
+          } else if (error.toString().includes('401')) {
+            console.log('401')
+            return '401'
+          } else {
+            return error
+          }
         })
     },
   },

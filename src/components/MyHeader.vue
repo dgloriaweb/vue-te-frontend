@@ -36,7 +36,7 @@ function register() {
 onMounted(() => {
   store.setLoggedInStatus();
   if (store.isLoggedIn) {
-    jobStore.getJobSummaryData()
+    jobStore.setJobSummaryData()
   }
 })
 

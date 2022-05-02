@@ -1,5 +1,5 @@
 <template>
-  <div id="myGridContainer">
+  <div id="myGridContainer" v-if="jobStore.personUpdated">
     <div id="myGridColumn" v-if="jobStore.match_rates">
       <h2>Your Personal Preferences</h2>
       <div id="ratesContainer">
@@ -23,7 +23,6 @@
           <h3>Usual work location</h3>
 
           <input
-            :myClass="{ 'red-text': isDirty['workplace'] }"
             type="checkbox"
             name="workplace"
             id="workplaceChk"
@@ -32,7 +31,6 @@
           <label for="workplaceChk">I want to work at the workplace</label>
           <br />
           <input
-            :myClass="{ 'red-text': isDirty['remote'] }"
             type="checkbox"
             name="remote"
             id="remoteChk"
@@ -42,7 +40,6 @@
           <br />
           <h3>Usual working days</h3>
           <input
-            :myClass="{ 'red-text': isDirty['workdays'] }"
             type="checkbox"
             name="workdays"
             id="workdaysChk"
@@ -51,7 +48,6 @@
           <label for="workdaysChk">I want to work workdays</label>
           <br />
           <input
-            :myClass="{ 'red-text': isDirty['saturday'] }"
             type="checkbox"
             name="saturday"
             id="saturdayChk"
@@ -60,7 +56,6 @@
           <label for="saturdayChk">Can do Saturdays</label>
           <br />
           <input
-            :myClass="{ 'red-text': isDirty['sunday'] }"
             type="checkbox"
             name="sunday"
             id="sundayChk"
@@ -69,7 +64,6 @@
           <label for="sundayChk">Can do Sundays</label>
           <br />
           <input
-            :myClass="{ 'red-text': isDirty['bank_holidays'] }"
             type="checkbox"
             name="bank_holidays"
             id="bank_holidaysChk"
@@ -80,7 +74,6 @@
 
           <h4>Special working days</h4>
           <input
-            :myClass="{ 'red-text': isDirty['sat_sun_bh_only'] }"
             type="checkbox"
             name="sat_sun_bh_only"
             id="sat_sun_bh_onlyChk"
@@ -93,7 +86,6 @@
 
           <h3>Usual working hours</h3>
           <input
-            :myClass="{ 'red-text': isDirty['normal_hours'] }"
             type="checkbox"
             name="normal_hours"
             id="normal_hoursChk"
@@ -102,7 +94,6 @@
           <label for="normal_hoursChk">Want to work normal hours</label>
           <br />
           <input
-            :myClass="{ 'red-text': isDirty['nightshift'] }"
             type="checkbox"
             name="nightshift"
             id="nightshiftChk"
@@ -111,7 +102,6 @@
           <label for="nightshiftChk">Can do nightshift</label>
           <br />
           <input
-            :myClass="{ 'red-text': isDirty['other_shift'] }"
             type="checkbox"
             name="other_shift"
             id="other_shiftChk"
@@ -122,7 +112,6 @@
 
           <h4>Special working hours</h4>
           <input
-            :myClass="{ 'red-text': isDirty['nightshift_only'] }"
             type="checkbox"
             name="nightshift_only"
             id="nightshift_onlyChk"
@@ -131,7 +120,6 @@
           <label for="nightshift_onlyChk">Want to do nightshift only</label>
           <br />
           <input
-            :myClass="{ 'red-text': isDirty['other_shift_only'] }"
             type="checkbox"
             name="other_shift_only"
             id="other_shift_onlyChk"
@@ -143,7 +131,6 @@
           <br />
           <h3>Other</h3>
           <input
-            :myClass="{ 'red-text': isDirty['overtime'] }"
             type="checkbox"
             name="overtime"
             id="overtimeChk"
@@ -153,7 +140,7 @@
           <br />
         </div>
 
-          <br />
+        <br />
         <button @click="confirmPersonSettingChanges()">Store settings</button>
       </div>
     </div>
@@ -180,10 +167,10 @@ function storePersonData() {
       else if (response.status != 200) {
         alert('unhandled error');
       }
-      else{
-        alert ('settings updated')
+      else {
+        alert('settings updated')
       }
-      jobStore.getJobSummaryData() // this might not even be required...
+      jobStore.setJobSummaryData() // this might not even be required...
 
     })
     .catch(error => {
