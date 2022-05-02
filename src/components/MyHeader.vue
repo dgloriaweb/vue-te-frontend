@@ -22,7 +22,7 @@ const jobStore = useJobStore()
 // const isLoggedIn = ref('isLoggedIn')
 function logout() {
   store.logout()
-  store.checkLoggedInStatus();
+  store.setLoggedInStatus();
   jobStore.$reset()
   router.push('/')
 }
@@ -34,7 +34,7 @@ function register() {
 }
 
 onMounted(() => {
-  store.checkLoggedInStatus();
+  store.setLoggedInStatus();
   if (store.isLoggedIn) {
     jobStore.getJobSummaryData()
   }

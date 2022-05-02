@@ -165,7 +165,6 @@ import { useJobStore } from '../store/jobstore'
 import personService from '../services/person.service'
 
 const jobStore = useJobStore()
-var isDirty = []
 
 function confirmPersonSettingChanges() {
   // validation here

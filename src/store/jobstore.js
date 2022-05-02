@@ -1,7 +1,8 @@
 //stores/users.js
 
 import { defineStore } from 'pinia'
-import jobService from '../services/job.service'
+import { useStore } from '../store/index'
+import axios from 'axios'
 
 // always rename the defineStore because it can cause disambiguity if names are the same
 export const useJobStore = defineStore('jobs', {
@@ -19,8 +20,16 @@ export const useJobStore = defineStore('jobs', {
   },
   actions: {
     getJobSummaryData() {
-      jobService
-        .getMyJobs()
+      const store = useStore()
+      const url = process.env.VUE_APP_API_URL + '/api/home'
+
+      axios
+        .get(url, {
+          headers: { Authorization: 'Bearer ' + store.access_token },
+          params: {
+            userId: store.userId,
+          },
+        })
         .then((response) => {
           this.match_rates = response.data.all_job_match_rates
           this.personUpdated = response.data.person

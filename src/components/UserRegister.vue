@@ -63,7 +63,7 @@ function register() {
       } else {
         alert(response.data.errors);
       }
-      store.checkLoggedInStatus();
+      store.setLoggedInStatus();
       // successful = true
       router.push('/')
     })

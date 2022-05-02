@@ -1,5 +1,3 @@
-//stores/users.js
-
 import { defineStore } from 'pinia'
 // always rename the defineStore because it can cause disambiguity if names are the same
 export const useStore = defineStore('main', {
@@ -7,7 +5,6 @@ export const useStore = defineStore('main', {
     isLoggedIn: false,
     userId: null,
     access_token: null,
-    storedUser: null,
   }),
   getters: {
     getLoginState(state) {
@@ -16,34 +13,29 @@ export const useStore = defineStore('main', {
     getUserId(state) {
       return state.userId
     },
-    getStoredUser(state) {
-      state.storedUser = localStorage.getItem('user')
-      return state.storedUser
-    },
     getAccessToken(state) {
       return state.access_token
     },
   },
   actions: {
-    checkLoggedInStatus() {
-      this.getStoredUser
-      // var storedUser = localStorage.getItem('user')
-      if (this.storedUser) {
-        // set user as logged in
-        // setup user id and token
-        this.userId = JSON.parse(this.storedUser)['userId']
-        this.access_token = JSON.parse(this.storedUser)['token']
-        // we need to validate the received token with an api request, 
-        // since localStorage can be hacked
-        // need to do a simple user exists request
-        if (this.access_token) {
-          this.isLoggedIn = true
-        }
+    setAccessToken() {
+      let storedUser = JSON.parse(localStorage.getItem('user'))
+      this.access_token = storedUser?.token
+    },
+    setUserId() {
+      let storedUser = JSON.parse(localStorage.getItem('user'))
+      this.userId = storedUser?.userId
+    },
+    setLoggedInStatus() {
+      this.setAccessToken()
+      this.setUserId()
+      if (this.access_token) {
+        this.isLoggedIn = true
       }
     },
     setUserInLocalStore(userdata) {
       localStorage.setItem('user', userdata)
-      this.checkLoggedInStatus()
+      this.setLoggedInStatus()
     },
     logout() {
       localStorage.removeItem('user')

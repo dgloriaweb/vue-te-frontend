@@ -30,6 +30,6 @@ const users = computed(() => {
 
 onMounted(() => {
   store.fetchUsers();
-  store.checkLoggedInStatus();
+  store.setLoggedInStatus();
 })
 </script>
