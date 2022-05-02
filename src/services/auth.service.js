@@ -1,21 +1,16 @@
 import axios from 'axios'
-import jobService from './job.service'
+import { useStore } from '@/store/index'
+import router from '@/router'
 
 class AuthService {
-  checkUser() {
-    // check if localStorage items aren't compromised
-    // oauth_access_tokens table
-    // user_id field
-    // token as submitted
-  
-    // jobService.getMyJobs()
-  }
   login(user) {
+    const store = useStore()
     const headers = {
       grant_type: 'client_credentials',
       client_id: process.env.VUE_APP_CLIENT_ID,
       client_secret: process.env.VUE_APP_CLIENT_SECRET,
-      name: user.name,
+      // name: user.name,
+      name: '',
       email: user.email,
       password: user.password,
       password_confirmation: user.password,
@@ -24,13 +19,19 @@ class AuthService {
       .post(process.env.VUE_APP_API_URL + '/api/login', headers)
       .then((response) => {
         if (response.data.token) {
-          localStorage.setItem('user', JSON.stringify(response.data))
+          alert("login successful")
+            var userCredentials = JSON.stringify(response.data)
+          store.setUserInLocalStore(userCredentials)
         }
-        console.log('token saved')
-        return response.data
+        store.initialiseComponents
+        router.push('/')
       })
       .catch((error) => {
-        return error.response
+        if (error.response.data.errors) {
+          alert(error.response.data.errors);
+        } else {
+          console.log('unhandled error');
+        }
       })
   }
   logout() {

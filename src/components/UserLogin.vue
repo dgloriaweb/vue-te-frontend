@@ -16,13 +16,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
-import { useStore } from '../store/index'
-import { useJobStore } from '../store/jobstore'
-import router from '../router'
-
-const store = useStore()
-const jobStore = useJobStore()
+import authService from '@/services/auth.service'
 
 // data
 var email = ref('email')
@@ -30,33 +24,12 @@ var password = ref('password')
 
 // methods
 function handleLogin() {
-  const headers = {
-    grant_type: 'client_credentials',
-    client_id: process.env.VUE_APP_CLIENT_ID,
-    client_secret: process.env.VUE_APP_CLIENT_SECRET,
-    email: email.value,
-    password: password.value,
-    password_confirmation: password.value,
+  let user = {
+    email : email.value,
+    password : password.value
   }
-  return axios
-    .post(process.env.VUE_APP_API_URL + '/api/login', headers)
-    .then((response) => {
-      if (response.data.token) {
-        alert("login successful")
-        var userCredentials = JSON.stringify(response.data)
-        store.setUserInLocalStore(userCredentials)
-      }
-      store.setLoggedInStatus()
-      jobStore.setJobSummaryData()
-      router.push('/')
-    })
-    .catch((error) => {
-      if (error.response.data.errors) {
-        alert(error.response.data.errors);
-      } else {
-        console.log('unhandled error');
-      }
-    })
+  console.log(user);
+  authService.login(user)
 }
 </script>
 

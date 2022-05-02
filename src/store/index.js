@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { useJobStore } from '../store/jobstore'
+
 // always rename the defineStore because it can cause disambiguity if names are the same
 export const useStore = defineStore('main', {
   state: () => ({
@@ -18,6 +20,13 @@ export const useStore = defineStore('main', {
     },
   },
   actions: {
+    initialiseComponents() {
+      const jobStore = useJobStore()
+      this.setLoggedInStatus()
+      if (this.isLoggedIn) {
+        jobStore.setJobSummaryData()
+      }
+    },
     setAccessToken() {
       let storedUser = JSON.parse(localStorage.getItem('user'))
       this.access_token = storedUser?.token
