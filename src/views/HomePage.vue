@@ -153,6 +153,7 @@
           <br />
         </div>
 
+          <br />
         <button @click="confirmPersonSettingChanges()">Store settings</button>
       </div>
     </div>

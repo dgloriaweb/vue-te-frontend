@@ -1,6 +1,15 @@
 import axios from 'axios'
+import jobService from './job.service'
 
 class AuthService {
+  checkUser() {
+    // check if localStorage items aren't compromised
+    // oauth_access_tokens table
+    // user_id field
+    // token as submitted
+  
+    // jobService.getMyJobs()
+  }
   login(user) {
     const headers = {
       grant_type: 'client_credentials',

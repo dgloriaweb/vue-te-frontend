@@ -43,9 +43,9 @@ function handleLogin() {
     .then((response) => {
       if (response.data.token) {
         alert("login successful")
-        localStorage.setItem('user', JSON.stringify(response.data))
+        var userCredentials = JSON.stringify(response.data)
+        store.setUserInLocalStore(userCredentials)
       }
-      store.checkLoggedInStatus();
       jobStore.getJobSummaryData()
       router.push('/')
     })
