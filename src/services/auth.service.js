@@ -3,6 +3,10 @@ import { useStore } from '@/store/index'
 import router from '@/router'
 
 class AuthService {
+  getToken(){
+    const store = useStore()
+    return { Authorization: 'Bearer ' + store.access_token }
+  }
   login(user) {
     const store = useStore()
     const headers = {

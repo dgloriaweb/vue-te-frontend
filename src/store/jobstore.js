@@ -22,7 +22,6 @@ export const useJobStore = defineStore('jobs', {
     setJobSummaryData() {
       const store = useStore()
       const url = process.env.VUE_APP_API_URL + '/api/home'
-
       axios
         .get(url, {
           headers: { Authorization: 'Bearer ' + store.access_token },
