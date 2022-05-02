@@ -10,7 +10,7 @@ class JobService {
       })
       return response
     } catch (error) {
-      alert('error getting job details: '. error)
+      console.log(error)
     }
   }
 }

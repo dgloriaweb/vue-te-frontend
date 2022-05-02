@@ -3,20 +3,25 @@
 import { defineStore } from 'pinia'
 import { useStore } from '../store/index'
 import axios from 'axios'
+import jobService from '@/services/job.service'
 
 // always rename the defineStore because it can cause disambiguity if names are the same
 export const useJobStore = defineStore('jobs', {
   state: () => ({
     match_rates: null,
     personUpdated: null,
+    job: null,
   }),
   getters: {
-    // getMatchRates(state) {
-    //     return state.match_rates
-    //   },
-    // getPersonUpdated(state) {
-    //     return state.personUpdated
-    //   },
+    getMatchRates(state) {
+      return state.match_rates
+    },
+    getPersonUpdated(state) {
+      return state.personUpdated
+    },
+    getJob(state) {
+      return state.job
+    },
   },
   actions: {
     setJobSummaryData() {
@@ -53,6 +58,20 @@ export const useJobStore = defineStore('jobs', {
             return error
           }
         })
+    },
+    setJob(id) {
+      jobService
+        .getJobDetails(id)
+        .then((response) => {
+          this.job = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    unsetJob() {
+      this.job = null
+      //also clear it from the cache
     },
   },
 })

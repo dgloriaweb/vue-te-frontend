@@ -1,11 +1,17 @@
 <template>
   <div class="">
     <nav>
-      <router-link to="/">Home</router-link> 
+      <router-link to="/">Home</router-link>
       &nbsp;
-      <button @click="logout" v-if="store.isLoggedIn"><i class="fa-solid fa-user"></i> Logout</button>
-      <button @click="login" v-if="!store.isLoggedIn"><i class="fa-solid fa-user"></i> Login</button>
-      <button @click="register" v-if="!store.isLoggedIn"><i class="fa-solid fa-user"></i> Register</button>
+      <button @click="logout" v-if="store.isLoggedIn">
+        <i class="fa-solid fa-user"></i> Logout
+      </button>
+      <button @click="login" v-if="!store.isLoggedIn">
+        <i class="fa-solid fa-user"></i> Login
+      </button>
+      <button @click="register" v-if="!store.isLoggedIn">
+        <i class="fa-solid fa-user"></i> Register
+      </button>
     </nav>
   </div>
 </template>

@@ -22,6 +22,9 @@ export const useStore = defineStore('main', {
   actions: {
     initialiseComponents() {
       const jobStore = useJobStore()
+      // clear job values
+      jobStore.unsetJob()
+      //check if user is still logged in
       this.setLoggedInStatus()
       if (this.isLoggedIn) {
         jobStore.setJobSummaryData()
