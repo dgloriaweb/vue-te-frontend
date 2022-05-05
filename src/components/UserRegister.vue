@@ -32,9 +32,10 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useStore } from '../store/index'
-import router from '../router'
-const store = useStore()
+import { useRouter } from 'vue-router'
 
+const store = useStore()
+const router = useRouter()
 
 // data
 var name = ref('name')
@@ -73,7 +74,6 @@ function register() {
       } else {
         console.log('unhandled error');
       }
-
     })
 }
 </script>

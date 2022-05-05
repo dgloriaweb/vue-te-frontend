@@ -20,23 +20,24 @@
 import { useStore } from '../store/index'
 import { useJobStore } from '../store/jobstore'
 import { onMounted } from 'vue'
-import router from '../router'
+import { useRouter } from 'vue-router'
 
+const route = useRouter()
 
 const store = useStore()
 const jobStore = useJobStore()
-// const isLoggedIn = ref('isLoggedIn')
+
 function logout() {
   store.logout()
   store.setLoggedInStatus();
   jobStore.$reset()
-  router.push('/')
+  route.push('/')
 }
 function login() {
-  router.push('/login')
+  route.push('/login')
 }
 function register() {
-  router.push('/register')
+  route.push('/register')
 }
 
 onMounted(() => {
