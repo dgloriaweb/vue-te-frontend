@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useStore } from '@/store/index'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
 class AuthService {
   getApiHeaders() {
@@ -12,6 +12,7 @@ class AuthService {
     }
   }
   login(user) {
+    const route = useRouter()
     const store = useStore()
     const headers = {
       grant_type: 'client_credentials',
@@ -32,7 +33,7 @@ class AuthService {
           store.setUserInLocalStore(userCredentials)
         }
         store.initialiseComponents
-        router.push('/')
+        route.push('/')
       })
       .catch((error) => {
         if (error.response.data.errors) {
