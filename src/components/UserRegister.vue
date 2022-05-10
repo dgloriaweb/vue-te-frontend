@@ -30,12 +30,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
-import { useStore } from '../store/index'
-import { useRouter } from 'vue-router'
+import authService from '@/services/auth.service'
 
-const store = useStore()
-const router = useRouter()
 
 // data
 var name = ref('name')
@@ -43,37 +39,14 @@ var email = ref('email')
 var password = ref('password')
 var password_confirmation = ref('password_confirmation')
 
-// var successful = false
-
+// methods
 function register() {
-  // successful = false
-
-  const headers = {
-    name: name.value,
+  let user = {
     email: email.value,
     password: password.value,
+    name: name.value,
     password_confirmation: password_confirmation.value,
   }
-  return axios
-    .post(process.env.VUE_APP_API_URL + '/api/register', headers)
-    .then((response) => {
-
-      if (response.status == 200) {
-        alert("registration successful")
-        this.$router.push('/')
-      } else {
-        alert(response.data.errors);
-      }
-      store.setLoggedInStatus();
-      // successful = true
-      router.push('/')
-    })
-    .catch((error) => {
-      if(error.response.data.errors){
-        alert(error.response.data.errors);
-      } else {
-        console.log('unhandled error');
-      }
-    })
+  authService.register(user)
 }
 </script>
