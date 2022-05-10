@@ -12,8 +12,8 @@ class AuthService {
     }
   }
   login(user) {
-    const route = useRouter()
     const store = useStore()
+    const route = useRouter()
     const headers = {
       grant_type: 'client_credentials',
       client_id: process.env.VUE_APP_CLIENT_ID,
@@ -36,7 +36,7 @@ class AuthService {
         route.push('/')
       })
       .catch((error) => {
-        if (error.response.data.errors) {
+        if (error?.response?.data?.errors) {
           alert(error.response.data.errors)
         } else {
           console.log('unhandled error')
