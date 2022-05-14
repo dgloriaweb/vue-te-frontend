@@ -141,12 +141,11 @@
         </div>
 
         <br />
-        <button @click="confirmPersonSettingChanges()">Store settings</button>
+        <button @click="showModal('changes: abc')">Store settings</button>
       </div>
     </div>
   </div>
   <SubscriptionForm :age="12" @submit="subscribeUser" />
-  <button id="show-modal" @click="showModal">Show Modal</button>
   <Transition name="modal">
     <div v-if="show" class="modal-mask">
       <div class="modal-wrapper">
@@ -154,7 +153,7 @@
           <div class="modal-header">
             <slot name="header">default header</slot>
           </div>
-
+          {{ text }}
           <div class="modal-body">
             <slot name="body">default body</slot>
           </div>
@@ -162,7 +161,15 @@
           <div class="modal-footer">
             <slot name="footer">
               default footer
-              <button class="modal-default-button" @click="closeModal">OK</button>
+              <button
+                class="modal-default-button"
+                @click="confirmPersonSettingChanges()"
+              >
+                OK
+              </button>
+              <button class="modal-default-button" @click="closeModal">
+                Cancel
+              </button>
             </slot>
           </div>
         </div>
@@ -179,13 +186,15 @@ import { ref } from 'vue'
 const jobStore = useJobStore()
 
 let show = ref(false)
+let text = ref('')
 function subscribeUser() {
   console.log("form submitted! do something");
 }
-function showModal(){
+function showModal(submittedText) {
+  text = submittedText
   show.value = true
 }
-function closeModal(){
+function closeModal() {
   show.value = false
 }
 
@@ -205,6 +214,8 @@ function storePersonData() {
       }
       else {
         alert('settings updated')
+        closeModal()
+
       }
       jobStore.setJobSummaryData() // this might not even be required...
 
