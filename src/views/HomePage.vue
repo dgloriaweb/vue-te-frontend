@@ -145,7 +145,7 @@
       </div>
     </div>
   </div>
-  <SubscriptionForm :age="12" @submit="subscribeUser" />
+  
   <Transition name="modal">
     <div v-if="show" class="modal-mask">
       <div class="modal-wrapper">
@@ -181,15 +181,12 @@
 <script setup>
 import { useJobStore } from '../store/jobstore'
 import personService from '../services/person.service'
-import SubscriptionForm from '@/components/TestComponent'
 import { ref } from 'vue'
 const jobStore = useJobStore()
 
 let show = ref(false)
 let text = ref('')
-function subscribeUser() {
-  console.log("form submitted! do something");
-}
+
 function showModal(submittedText) {
   text = submittedText
   show.value = true
