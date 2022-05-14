@@ -145,13 +145,19 @@
       </div>
     </div>
   </div>
+   <SubscriptionForm age=12  @submit="subscribeUser" />
 </template>
 
 <script setup>
 import { useJobStore } from '../store/jobstore'
 import personService from '../services/person.service'
+ import SubscriptionForm from '@/components/TestComponent'
+    const jobStore = useJobStore()
+  
+  function subscribeUser() {
+    console.log("form submitted! do something");
+  }
 
-const jobStore = useJobStore()
 
 function confirmPersonSettingChanges() {
   // validation here
