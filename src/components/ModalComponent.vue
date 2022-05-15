@@ -5,21 +5,24 @@
         <div class="modal-wrapper">
           <div class="modal-container">
             <div class="modal-header">
-              <slot name="header">default header</slot>
+              <slot name="header">{{props.modalHeader}}</slot>
             </div>
             <div class="modal-body">
-              <slot name="body">default body</slot>
+              <slot name="body">{{props.modalBody}}</slot>
             </div>
 
             <div class="modal-footer">
               <slot name="footer">
-                default footer
-                <button class="modal-default-button" @click="$emit('confirmPersonSettingChanges')">
+                {{props.modalFooter}}
+                <br>
+                <button class="modal-default-button" @click="$emit('submitModal')">
                   OK
                 </button>
+                &nbsp;
                 <button class="modal-default-button"  @click="$emit('close')">
                   Cancel
                 </button>
+                <br>
               </slot>
             </div>
           </div>
@@ -35,6 +38,15 @@ import {  defineProps } from 'vue'
 const props = defineProps({
   show: {
     type: Boolean
+  },
+  modalBody:{
+    type: String
+  },
+  modalHeader:{
+    type: String
+  },
+  modalFooter:{
+    type: String
   }
 })
 

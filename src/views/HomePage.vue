@@ -147,8 +147,10 @@
   </div>
   <ModalComponent
     :show="showModal"
+    :modalBody="modalBodyText"
+    :modalHeader="modalHeaderText"
     @close="hideModal"
-    @confirmPersonSettingChanges="confirmPersonSettingChanges()"
+    @submitModal="confirmPersonSettingChanges()"
   />
 </template>
 
@@ -161,6 +163,8 @@ import { ref } from 'vue'
 const jobStore = useJobStore()
 
 let showModal = ref(false)
+let modalHeaderText = "Confirm Changes"
+let modalBodyText = "These changes will be submitted:"
 
 function hideModal() {
   showModal.value = false
