@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import Login from '../components/UserLogin.vue'
 import Register from '../components/UserRegister.vue'
+import UserSkills from '../components/UserSkills.vue'
 import JobDetail from '../views/JobDetail.vue'
 
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
     path: '/register',
     name: 'register',
     component: Register,
+  },
+  {
+    path: '/userSkills',
+    name: 'userSkills',
+    component: UserSkills,
   },
   {
     path: '/jobs/:id',
