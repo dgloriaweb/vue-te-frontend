@@ -1,16 +1,21 @@
 <template>
   <div>
     <h1>User Skills</h1>
-    <div v-for="skill in skills" :key="skill.id">
-      {{skill.skill}}
-  </div>
+    <div v-for="skill in skillStore.skills" :key="skill.id" id="myGridRow">
+      {{ skill }}
+    </div>
   </div>
 </template>
 
 <script setup>
-import personService from '@/services/person.service';
+import { useSkillStore } from '../store/skillstore'
 
-const skills = personService.getPersonSkills()
+function getSkills(){
+  return ["one","two","three"]
+}
+
+
+
 
 </script>
 
