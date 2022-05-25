@@ -16,8 +16,32 @@ class PersonService {
       })
       return response
     } catch (error) {
-      alert ('error in updatePerson: '. error)
+      alert('error in updatePerson: '.error)
     }
+  }
+
+  getPersonSkills = () => {
+    let array = [
+      {
+        id: 86,
+        person_id: 4,
+        prop_link_id: 86,
+        prop_link_type: 'skill',
+        user_id: 10,
+        skill: 'PHP',
+        skill_type: 'job_type',
+      },
+      {
+        id: 63,
+        person_id: 4,
+        prop_link_id: 63,
+        prop_link_type: 'skill',
+        user_id: 10,
+        skill: 'JavaScript',
+        skill_type: 'job_type',
+      },
+    ]
+    return array
   }
 }
 export default new PersonService()
