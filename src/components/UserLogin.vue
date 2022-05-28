@@ -15,21 +15,32 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import authService from '@/services/auth.service'
+import { useStore } from '@/store/index'
+import { useRouter } from 'vue-router'
 
 // data
 var email = ref('email')
 var password = ref('password')
+const store = useStore()
+const route = useRouter()
 
 // methods
 function handleLogin() {
   let user = {
-    email : email.value,
-    password : password.value
+    email: email.value,
+    password: password.value
   }
   authService.login(user)
+  route.push({ name: 'homePage' })
+
 }
+onMounted(() => {
+  if (store.userId) {
+    route.push({ name: 'homePage' })
+  }
+})
 </script>
 
 <style scoped>

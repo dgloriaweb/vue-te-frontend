@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useStore } from '@/store/index'
-import { useRouter } from 'vue-router'
 
 class AuthService {
   getApiHeaders() {
@@ -13,7 +12,6 @@ class AuthService {
   }
   login(user) {
     const store = useStore()
-    const route = useRouter()
     const headers = {
       grant_type: 'client_credentials',
       client_id: process.env.VUE_APP_CLIENT_ID,
@@ -33,7 +31,6 @@ class AuthService {
           store.setUserInLocalStore(userCredentials)
         }
         store.initialiseComponents
-        route.push('/')
       })
       .catch((error) => {
         if (error?.response?.data?.errors) {
@@ -48,6 +45,7 @@ class AuthService {
     store.logout()
   }
   register(user) {
+    const store = useStore()
     const headers = {
       name: user.name,
       email: user.email,
@@ -57,7 +55,12 @@ class AuthService {
     return axios
       .post(process.env.VUE_APP_API_URL + '/api/register', headers)
       .then((response) => {
-        return response
+        if (response.data.token) {
+          alert('login successful')
+          var userCredentials = JSON.stringify(response.data)
+          store.setUserInLocalStore(userCredentials)
+        }
+        store.initialiseComponents
       })
       .catch((error) => {
         return error.response
