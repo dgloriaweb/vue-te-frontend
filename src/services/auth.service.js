@@ -30,7 +30,7 @@ class AuthService {
           var userCredentials = JSON.stringify(response.data)
           store.setUserInLocalStore(userCredentials)
         }
-        store.initialiseComponents
+        store.initialiseComponents()
       })
       .catch((error) => {
         if (error?.response?.data?.errors) {
@@ -60,7 +60,7 @@ class AuthService {
           var userCredentials = JSON.stringify(response.data)
           store.setUserInLocalStore(userCredentials)
         }
-        store.initialiseComponents
+        store.initialiseComponents()
       })
       .catch((error) => {
         return error.response

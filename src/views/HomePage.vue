@@ -2,7 +2,9 @@
   <div id="myGridContainer" v-if="jobStore.personUpdated">
     <div id="myGridColumn">
       <h2>Menu</h2>
-      <router-link :to="{name:'userSkills'}" class="userskills_btn">Go to my skills</router-link>
+      <router-link :to="{ name: 'userSkills' }" class="userskills_btn"
+        >Go to my skills</router-link
+      >
     </div>
     <div id="myGridColumn" v-if="jobStore.match_rates">
       <h2>Your Personal Preferences</h2>
@@ -159,12 +161,14 @@
 </template>
 
 <script setup>
+import { useStore } from '@/store/index'
 import { useJobStore } from '../store/jobstore'
 import personService from '../services/person.service'
 import ModalComponent from '@/components/ModalComponent'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const jobStore = useJobStore()
+const store = useStore()
 
 let showModal = ref(false)
 let modalHeaderText = "Confirm Changes"
@@ -206,22 +210,26 @@ function storePersonData() {
     })
 }
 
+onMounted(() =>
+  store.initialiseComponents()
+)
+
 </script>
 
 <style scoped>
 #myGridContainer {
   width: fit-content;
   display: grid;
-  grid-template-columns:1fr;
+  grid-template-columns: 1fr;
   gap: 35px;
 }
-@media(min-width:600px){
+@media (min-width: 600px) {
   #myGridContainer {
-  width: fit-content;
-  display: grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap: 35px;
-}
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 35px;
+  }
 }
 #myGridColumn {
   padding: 1vw;
@@ -243,15 +251,13 @@ function storePersonData() {
   content: "%";
 }
 
-.userskills_btn{
-  padding:1vw 5vw;
-  border:1px solid black;
+.userskills_btn {
+  padding: 1vw 5vw;
+  border: 1px solid black;
   background: #eee;
-  text-align:left;
+  text-align: left;
 }
-.userskills_btn:hover{
-  
+.userskills_btn:hover {
   background: #ddd;
 }
-
 </style>
