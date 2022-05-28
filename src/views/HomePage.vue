@@ -211,11 +211,21 @@ function storePersonData() {
 <style scoped>
 #myGridContainer {
   width: fit-content;
-  display: flex;
+  display: grid;
+  grid-template-columns:1fr;
   gap: 35px;
 }
+@media(min-width:600px){
+  #myGridContainer {
+  width: fit-content;
+  display: grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap: 35px;
+}
+}
 #myGridColumn {
-  padding: 15px;
+  padding: 1vw;
+  min-width: 200px;
 }
 #myGridRow {
   display: grid;
@@ -234,7 +244,7 @@ function storePersonData() {
 }
 
 .userskills_btn{
-  padding:10px 50px;
+  padding:1vw 5vw;
   border:1px solid black;
   background: #eee;
   text-align:left;
