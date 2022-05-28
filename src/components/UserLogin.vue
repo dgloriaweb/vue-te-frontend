@@ -32,9 +32,9 @@ function handleLogin() {
     email: email.value,
     password: password.value
   }
-  authService.login(user)
+  authService.login(user).then(()=>
   route.push({ name: 'homePage' })
-
+  )
 }
 onMounted(() => {
   if (store.userId) {

@@ -49,8 +49,8 @@ function register() {
     name: name.value,
     password_confirmation: password_confirmation.value,
   }
-  authService.register(user)
+  authService.register(user).then(()=>
   route.push({ name: 'homePage' })
-
+  )
 }
 </script>
