@@ -1,5 +1,6 @@
 //stores/users.js
 
+import personService from '@/services/person.service'
 import { defineStore } from 'pinia'
 // import personService from '@/services/person.service';
 
@@ -14,6 +15,12 @@ export const useSkillStore = defineStore('skills', {
     },
   },
   actions: {
+    setSkill(){
+      personService.getPersonSkills().then((response)=>{
+        console.log(response.data);
+        this.skill = response.data
+      })
+    },
     unsetskill() {
       this.skill = null
       //also clear it from the cache
