@@ -36,7 +36,7 @@ class AuthService {
         if (error?.response?.data?.errors) {
           alert(error.response.data.errors)
         } else {
-          console.log('unhandled error')
+          console.log('unhandled error: '.error)
         }
       })
   }
@@ -56,14 +56,18 @@ class AuthService {
       .post(process.env.VUE_APP_API_URL + '/api/register', headers)
       .then((response) => {
         if (response.data.token) {
-          alert('login successful')
+          alert('registration successful')
           var userCredentials = JSON.stringify(response.data)
           store.setUserInLocalStore(userCredentials)
         }
-        store.initialiseComponents()
+        return response
       })
       .catch((error) => {
-        return error.response
+        if (error?.response?.data?.errors) {
+          alert(error.response.data.errors)
+        } else {
+          console.log('unhandled error: '.error)
+        }
       })
   }
   resetPassword(user) {
@@ -80,7 +84,11 @@ class AuthService {
         return response
       })
       .catch((error) => {
-        return error.response
+        if (error?.response?.data?.errors) {
+          alert(error.response.data.errors)
+        } else {
+          console.log('unhandled error: '.error)
+        }
       })
   }
 }

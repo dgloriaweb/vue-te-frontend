@@ -1,4 +1,7 @@
 <template>
+  <div  v-if="!jobStore.personUpdated">
+    <h1>Find your true calling!</h1>
+    </div>
   <div id="myGridContainer" v-if="jobStore.personUpdated">
     <div id="myGridColumn">
       <h2>Menu</h2>

@@ -24,33 +24,52 @@
         v-model="password_confirmation"
       />
     </div>
-    <button @click="register">Sign Up</button>
+    <button @click="validate">Sign Up</button>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import authService from '@/services/auth.service'
+import { useStore } from '@/store/index'
 import { useRouter } from 'vue-router'
+import authService from '@/services/auth.service'
+import { ref, onMounted } from 'vue'
 
 
 // data
-var name = ref('name')
-var email = ref('email')
-var password = ref('password')
-var password_confirmation = ref('password_confirmation')
+var name = ref(null)
+var email = ref(null)
+var password = ref(null)
+var password_confirmation = ref(null)
+const store = useStore()
 const route = useRouter()
 
-// methods
-function register() {
+function validate() {
   let user = {
     email: email.value,
     password: password.value,
     name: name.value,
     password_confirmation: password_confirmation.value,
   }
+  // validation
+  if (!user.name || !user.email || !user.password || !user.password_confirmation) {
+    alert('please fill in all details.')
+  }
+  else {
+    register(user)
+  }
+}
+
+// methods
+function register(user) {
+
   authService.register(user).then(() =>
     route.push({ name: 'homePage' })
   )
+
 }
+onMounted(() => {
+  if (store.userId) {
+    route.push({ name: 'homePage' })
+  }
+})
 </script>
