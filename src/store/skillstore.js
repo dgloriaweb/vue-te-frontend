@@ -1,33 +1,42 @@
 //stores/users.js
 
 import personService from '@/services/person.service'
-import { defineStore, setMapStoreSuffix } from 'pinia'
-// import personService from '@/services/person.service';
+import skillService from '@/services/skill.service'
+import { defineStore } from 'pinia'
 
 // always rename the defineStore because it can cause disambiguity if names are the same
 export const useSkillStore = defineStore('skills', {
   state: () => ({
-    skill: null,
+    userSkills: null,
     skills: null,
   }),
   getters: {
-    getSkill(state) {
-      return state.skill
+    getUserSkills(state) {
+      return state.userSkills
     },
     getSkills(state){
-      return state.skills
+      return state.userSkills
     }
   },
   actions: {
-    setSkill(){
+    setUserSkills(){
       personService.getPersonSkills().then((response)=>{
-        console.log(response.data);
-        this.skill = response.data
+        // console.log(response.data);
+        this.userSkills = response.data
       })
     },
-    unsetskill() {
-      this.skill = null
+    unsetUserSkills() {
+      this.userSkill = null
       //also clear it from the cache
     },
+
+
+    //all skills
+    setSkills(){
+      skillService.getSkills().then((response)=>{
+        console.log(response.data);
+        this.skills = response.data
+      })
+    }
   },
 })

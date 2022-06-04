@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useJobStore } from '../store/jobstore'
+import { useSkillStore } from './skillstore'
 
 // always rename the defineStore because it can cause disambiguity if names are the same
 export const useStore = defineStore('main', {
@@ -29,6 +30,13 @@ export const useStore = defineStore('main', {
       if (this.isLoggedIn) {
         jobStore.setJobSummaryData()
       }
+
+      //skills
+      const skillStore = useSkillStore()
+      //set user skills
+      skillStore.setUserSkills()
+      //set all skills
+      skillStore.setSkills()
     },
     setAccessToken() {
       let storedUser = JSON.parse(localStorage.getItem('user'))
