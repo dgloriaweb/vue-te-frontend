@@ -20,10 +20,11 @@ class PersonService {
     }
   }
 
-  getPersonSkills =  async () => {
+  getPersonSkills = async () => {
     const store = useStore()
     try {
-      const url = process.env.VUE_APP_API_URL + '/api/showSkills/'+ store.userId
+      const url =
+        process.env.VUE_APP_API_URL + '/api/showSkills/' + store.userId
       const response = await axios.get(url, {
         headers: authService.getApiHeaders(),
       })

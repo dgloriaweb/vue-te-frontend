@@ -1,15 +1,18 @@
 <template>
   <div>
     <h1>User Skills</h1>
-    <div id="myGridContainer" v-if="skillStore.userSkills">
-      <h2>Your current skill list</h2>
-      <div v-for="userSkill in skillStore.userSkills" :key="userSkill.id" id="myGridRow">
-        {{ userSkill.skill }}
-      </div>
-    </div>
-    <div id="myGridContainer" v-if="skillStore.skills">
-      <h2>Skills list</h2>
-      <div v-for="skill in skillStore.skills" :key="skill.id" id="myGridRow">
+    <div id="">
+      <!-- {{skillStore.skills}} -->
+      <div v-for="skill in skillStore.skills" :key="skill.id">
+        <div v-if="st != skill.skill_type">
+          <h1>{{ skill.skill_type }}</h1>
+          <div :set="(st = skill.skill_type)"></div>
+          </div>
+      
+          <div v-if="cs != skill.core_skill">
+            <h3>{{ skill.core_skill }}</h3>
+            <div :set="(cs = skill.core_skill)"></div>
+        </div>
         {{ skill.skill }}
       </div>
     </div>
@@ -19,7 +22,8 @@
 <script setup>
 import { useSkillStore } from '../store/skillstore'
 const skillStore = useSkillStore()
-
+let st = null
+let cs = null
 
 </script>
 
@@ -28,15 +32,15 @@ const skillStore = useSkillStore()
   width: fit-content;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 35px;
-  border:1px solid gray;
+  gap: 5px;
+  border: 1px solid gray;
 }
 @media (min-width: 600px) {
   #myGridContainer {
     width: fit-content;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 35px;
+    gap: 5px;
   }
 }
 #myGridColumn {

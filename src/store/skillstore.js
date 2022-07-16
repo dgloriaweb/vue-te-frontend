@@ -14,13 +14,13 @@ export const useSkillStore = defineStore('skills', {
     getUserSkills(state) {
       return state.userSkills
     },
-    getSkills(state){
+    getSkills(state) {
       return state.userSkills
-    }
+    },
   },
   actions: {
-    setUserSkills(){
-      personService.getPersonSkills().then((response)=>{
+    setUserSkills() {
+      personService.getPersonSkills().then((response) => {
         // console.log(response.data);
         this.userSkills = response.data
       })
@@ -30,13 +30,12 @@ export const useSkillStore = defineStore('skills', {
       //also clear it from the cache
     },
 
-
     //all skills
-    setSkills(){
-      skillService.getSkills().then((response)=>{
-        console.log(response.data);
+    setSkills() {
+      skillService.getSkillsGrouped().then((response) => {
+        console.log(response.data)
         this.skills = response.data
       })
-    }
+    },
   },
 })
