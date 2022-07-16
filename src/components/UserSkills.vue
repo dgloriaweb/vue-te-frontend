@@ -1,20 +1,28 @@
 <template>
   <div>
-    <h1>User Skills</h1>
-    <div id="">
+    <h1>All Skills</h1>
+    <div id="skillWrapper">
       <!-- {{skillStore.skills}} -->
       <div v-for="skill in skillStore.skills" :key="skill.id">
         <div v-if="st != skill.skill_type">
           <h1>{{ skill.skill_type }}</h1>
           <div :set="(st = skill.skill_type)"></div>
-          </div>
-      
-          <div v-if="cs != skill.core_skill">
-            <h3>{{ skill.core_skill }}</h3>
-            <div :set="(cs = skill.core_skill)"></div>
         </div>
-        {{ skill.skill }}
+        
+        <div v-if="cs != skill.core_skill">
+          <div v-if="skill.core_skill" id="coreSkill">
+            <h3>{{ skill.core_skill }}</h3>
+          </div>
+          <div v-else>
+            <h3>Miscellaneous</h3>
+          </div>
+          <div :set="(cs = skill.core_skill)"></div>
+        </div>
+        <div>
+          <div class="myBtn">{{ skill.skill }}</div>
+        </div>
       </div>
+      <hr>
     </div>
   </div>
 </template>
@@ -62,4 +70,11 @@ let cs = null
 .grid-cell-2:after {
   content: "%";
 }
+.myBtn {
+  padding: 5px 10px;
+  border: 1px solid gray;
+  background-color: lightgray;
+  border-radius: 12px;
+}
+
 </style>
