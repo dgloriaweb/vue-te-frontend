@@ -1,28 +1,36 @@
 <template>
-  <div>
-    <h1>All Skills</h1>
-    <div id="skillWrapper">
-      <!-- {{skillStore.skills}} -->
-      <div v-for="skill in skillStore.skills" :key="skill.id">
-        <div v-if="st != skill.skill_type">
-          <h1>{{ skill.skill_type }}</h1>
-          <div :set="(st = skill.skill_type)"></div>
-        </div>
-        
-        <div v-if="cs != skill.core_skill">
-          <div v-if="skill.core_skill" id="coreSkill">
-            <h3>{{ skill.core_skill }}</h3>
+  <div id="container">
+    <div id="left-side">
+      <h1>All Skills</h1>
+      <div id="skillWrapper">
+        <!-- {{skillStore.skills}} -->
+        <div
+          v-for="skill in skillStore.skills"
+          :key="skill.id"
+          id="skillLoop"
+          style="display: inline-grid"
+        >
+          <div>
+            <div class="myBtn">{{ skill.skill }} <i class="fa fa-plus-circle"></i></div>
           </div>
-          <div v-else>
-            <h3>Miscellaneous</h3>
-          </div>
-          <div :set="(cs = skill.core_skill)"></div>
         </div>
-        <div>
-          <div class="myBtn">{{ skill.skill }}</div>
+        <hr />
+      </div>
+    </div>
+    <div id="right-side">
+      <h1>Your Skills</h1>
+      <div id="skillWrapper">
+        <div
+          v-for="userSkill in skillStore.userSkills"
+          :key="userSkill.id"
+          id="skillLoop"
+          style="display: inline-grid"
+        >
+          <div>
+            <div class="myBtn">{{ userSkill.skill }} <i class="fa fa-minus-circle"></i></div>
+          </div>
         </div>
       </div>
-      <hr>
     </div>
   </div>
 </template>
@@ -30,8 +38,6 @@
 <script setup>
 import { useSkillStore } from '../store/skillstore'
 const skillStore = useSkillStore()
-let st = null
-let cs = null
 
 </script>
 
@@ -76,5 +82,13 @@ let cs = null
   background-color: lightgray;
   border-radius: 12px;
 }
+#container{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+}
+#left-side,
+#right-side{
+  width:50%;
 
+}
 </style>
