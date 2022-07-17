@@ -3,18 +3,16 @@
     <div id="left-side">
       <h1>All Skills</h1>
       <div id="skillWrapper">
-        <!-- {{skillStore.skills}} -->
-        <div
-          v-for="skill in skillStore.skills"
-          :key="skill.id"
-          id="skillLoop"
-          style="display: inline-grid"
-        >
+        <div v-for="(value, key) in skillStore.skills" :key="key">
           <div>
-            <div class="myBtn">{{ skill.skill }} <i class="fa fa-plus-circle"></i></div>
+            <b>{{ key }}</b>
+          </div>
+          <div v-for="skill in value" :key="skill.id" id="skillLoop" style="display: inline-grid">
+            <div class="myBtn">
+            {{ skill.skill }} <i class="fa fa-plus-circle"></i>
+          </div>
           </div>
         </div>
-        <hr />
       </div>
     </div>
     <div id="right-side">
@@ -23,11 +21,12 @@
         <div
           v-for="userSkill in skillStore.userSkills"
           :key="userSkill.id"
-          id="skillLoop"
           style="display: inline-grid"
         >
           <div>
-            <div class="myBtn">{{ userSkill.skill }} <i class="fa fa-minus-circle"></i></div>
+            <div class="myBtn">
+              {{ userSkill.skill }} <i class="fa fa-minus-circle"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -38,7 +37,6 @@
 <script setup>
 import { useSkillStore } from '../store/skillstore'
 const skillStore = useSkillStore()
-
 </script>
 
 <style lang="css" scoped>
@@ -81,14 +79,11 @@ const skillStore = useSkillStore()
   border: 1px solid gray;
   background-color: lightgray;
   border-radius: 12px;
+  width: fit-content;
 }
-#container{
-  display:grid;
+#container {
+  display: grid;
   grid-template-columns: 1fr 1fr;
 }
-#left-side,
-#right-side{
-  width:50%;
 
-}
 </style>
