@@ -1,3 +1,4 @@
+import personService from '@/services/person.service'
 import { defineStore } from 'pinia'
 import { useJobStore } from '../store/jobstore'
 import { useSkillStore } from './skillstore'
@@ -7,6 +8,7 @@ export const useStore = defineStore('main', {
   state: () => ({
     isLoggedIn: false,
     userId: null,
+    personId: null,
     access_token: null,
   }),
   getters: {
@@ -15,6 +17,9 @@ export const useStore = defineStore('main', {
     },
     getUserId(state) {
       return state.userId
+    },
+    getPersonId(state) {
+      return state.personId
     },
     getAccessToken(state) {
       return state.access_token
@@ -37,6 +42,7 @@ export const useStore = defineStore('main', {
       skillStore.setUserSkills()
       //set all skills
       skillStore.setSkills()
+      this.setPersonId()
     },
     setAccessToken() {
       let storedUser = JSON.parse(localStorage.getItem('user'))
@@ -45,6 +51,11 @@ export const useStore = defineStore('main', {
     setUserId() {
       let storedUser = JSON.parse(localStorage.getItem('user'))
       this.userId = storedUser?.userId
+    },
+    setPersonId() {
+      let object = personService.getPersonByUserId(this.userId)
+      console.log(object.id);
+      this.personId = object.id
     },
     setLoggedInStatus() {
       this.setAccessToken()

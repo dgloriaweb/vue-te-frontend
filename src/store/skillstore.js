@@ -21,7 +21,6 @@ export const useSkillStore = defineStore('skills', {
   actions: {
     setUserSkills() {
       personService.getPersonSkills().then((response) => {
-        // console.log(response.data);
         this.userSkills = response.data
       })
     },

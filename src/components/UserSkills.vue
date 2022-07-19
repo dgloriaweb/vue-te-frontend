@@ -7,10 +7,15 @@
           <div>
             <b>{{ key }}</b>
           </div>
-          <div v-for="skill in value" :key="skill.id" id="skillLoop" style="display: inline-grid">
-            <div class="myBtn">
-            {{ skill.skill }} <i class="fa fa-plus-circle"></i>
-          </div>
+          <div
+            v-for="skill in value"
+            :key="skill.id"
+            id="skillLoop"
+            style="display: inline-grid"
+          >
+            <div class="myBtn" @click="addSkill(skill.id)">
+              {{ skill.skill }} <i class="fa fa-plus-circle"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -24,7 +29,7 @@
           style="display: inline-grid"
         >
           <div>
-            <div class="myBtn">
+            <div class="myBtn" @click="removeSkill(userSkill.id)">
               {{ userSkill.skill }} <i class="fa fa-minus-circle"></i>
             </div>
           </div>
@@ -32,11 +37,43 @@
       </div>
     </div>
   </div>
+ 
 </template>
 
 <script setup>
+import personService from '@/services/person.service';
 import { useSkillStore } from '../store/skillstore'
+import { useStore } from '@/store/index'
 const skillStore = useSkillStore()
+const store = useStore()
+
+
+function addSkill(skill_id) {
+  personService.addSkillToPerson(store.personId, skill_id).then(
+    (response) => {
+      if (response.status == 223) {
+        alert(response.data)
+      }
+      else if (response.status != 200) {
+        alert('unhandled error');
+      }
+      else {
+        alert('record added')
+      }
+    })
+    .catch(error => {
+      if (error.response.data.errors) {
+        alert(error.response.data.errors);
+      } else {
+        alert('unhandled error');
+      }
+    })
+}
+function removeSkill(skill_id) {
+  console.log(skill_id);
+}
+
+
 </script>
 
 <style lang="css" scoped>
@@ -85,5 +122,4 @@ const skillStore = useSkillStore()
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-
 </style>
