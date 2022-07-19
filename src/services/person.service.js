@@ -19,7 +19,7 @@ class PersonService {
       alert('error in updatePerson: '.error)
     }
   }
-  addSkillToPerson = async (skillId) => {
+  addSkillToPerson = async (person,skillId) => {
     const store = useStore()
     try {
       const url =
@@ -28,7 +28,11 @@ class PersonService {
         store.personId + '/' +
         skillId
       const response = await axios.post(url, {
-        headers: authService.getApiHeaders()
+        headers: authService.getApiHeaders,
+        params: {
+          userId: store.userId,
+          person,
+        },
       })
       return response
     } catch (error) {

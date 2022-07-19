@@ -8,6 +8,7 @@ export const useStore = defineStore('main', {
   state: () => ({
     isLoggedIn: false,
     userId: null,
+    person: null,
     personId: null,
     access_token: null,
   }),
@@ -17,6 +18,9 @@ export const useStore = defineStore('main', {
     },
     getUserId(state) {
       return state.userId
+    },
+    getPerson(state) {
+      return state.person
     },
     getPersonId(state) {
       return state.personId
@@ -51,12 +55,15 @@ export const useStore = defineStore('main', {
       let storedUser = JSON.parse(localStorage.getItem('user'))
       this.userId = storedUser?.userId
     },
+    setPerson() {
+      personService.getPersonByUserId().then((response) => {
+        this.person = response.data
+      })
+    },
     setPersonId() {
-      personService.getPersonByUserId().then(   
-        (response) => {     
+      personService.getPersonByUserId().then((response) => {
         this.personId = response.data.id
-        }
-      )
+      })
     },
     setLoggedInStatus() {
       this.setAccessToken()
@@ -64,6 +71,7 @@ export const useStore = defineStore('main', {
       if (this.access_token) {
         this.isLoggedIn = true
       }
+      this.setPerson()
       this.setPersonId()
     },
     setUserInLocalStore(userdata) {
