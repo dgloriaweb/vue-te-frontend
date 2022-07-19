@@ -19,21 +19,16 @@ class PersonService {
       alert('error in updatePerson: '.error)
     }
   }
-  addSkillToPerson = async (person, skillId) => {
+  addSkillToPerson = async (skillId) => {
     const store = useStore()
     try {
       const url =
         process.env.VUE_APP_API_URL +
         '/api/addPersonSkill/' +
-        person.id + '/' +
+        store.personId + '/' +
         skillId
       const response = await axios.post(url, {
-        headers: authService.getApiHeaders,
-        params: {
-          userId: store.userId,
-          person,
-         
-        },
+        headers: authService.getApiHeaders()
       })
       return response
     } catch (error) {
