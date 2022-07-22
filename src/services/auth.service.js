@@ -7,7 +7,8 @@ class AuthService {
     return {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: 'Bearer ' + store.access_token,
+      'Access-Control-Allow-Headers':'X-Requested-With, Content-Type, X-Token-Auth, Authorization',
+      Authorization: 'Bearer ' + store.access_token
     }
   }
   login(user) {

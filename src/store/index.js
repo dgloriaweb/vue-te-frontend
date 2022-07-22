@@ -9,7 +9,6 @@ export const useStore = defineStore('main', {
     isLoggedIn: false,
     userId: null,
     person: null,
-    personId: null,
     access_token: null,
   }),
   getters: {
@@ -21,9 +20,6 @@ export const useStore = defineStore('main', {
     },
     getPerson(state) {
       return state.person
-    },
-    getPersonId(state) {
-      return state.personId
     },
     getAccessToken(state) {
       return state.access_token
@@ -46,6 +42,8 @@ export const useStore = defineStore('main', {
       skillStore.setUserSkills()
       //set all skills
       skillStore.setSkills()
+      // set person
+      this.setPerson()
     },
     setAccessToken() {
       let storedUser = JSON.parse(localStorage.getItem('user'))
@@ -59,11 +57,7 @@ export const useStore = defineStore('main', {
       personService.getPersonByUserId().then((response) => {
         this.person = response.data
       })
-    },
-    setPersonId() {
-      personService.getPersonByUserId().then((response) => {
-        this.personId = response.data.id
-      })
+    
     },
     setLoggedInStatus() {
       this.setAccessToken()
@@ -71,8 +65,6 @@ export const useStore = defineStore('main', {
       if (this.access_token) {
         this.isLoggedIn = true
       }
-      this.setPerson()
-      this.setPersonId()
     },
     setUserInLocalStore(userdata) {
       localStorage.setItem('user', userdata)

@@ -32,7 +32,6 @@ export const useSkillStore = defineStore('skills', {
     //all skills
     setSkills() {
       skillService.getSkillsGrouped().then((response) => {
-        console.log(response.data)
         this.skills = response.data
       })
     },

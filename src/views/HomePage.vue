@@ -164,14 +164,13 @@
 </template>
 
 <script setup>
-import { useStore } from '@/store/index'
+// import { useStore } from '@/store/index'
 import { useJobStore } from '../store/jobstore'
 import personService from '../services/person.service'
 import ModalComponent from '@/components/ModalComponent'
-import { ref, onMounted } from 'vue'
+import { ref} from 'vue'
 
 const jobStore = useJobStore()
-const store = useStore()
 
 let showModal = ref(false)
 let modalHeaderText = "Confirm Changes"
@@ -202,7 +201,6 @@ function storePersonData() {
         alert('settings updated')
         hideModal()
       }
-      jobStore.setJobSummaryData() // this might not even be required...
     })
     .catch(error => {
       if (error.response.data.errors) {
@@ -213,9 +211,6 @@ function storePersonData() {
     })
 }
 
-onMounted(() =>
-  store.initialiseComponents()
-)
 
 </script>
 

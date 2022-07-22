@@ -49,7 +49,7 @@ const store = useStore()
 
 
 function addSkill(skill_id) {
-  personService.addSkillToPerson(store.personId, skill_id).then(
+  personService.addSkillToPerson(store.person,skill_id).then(
     (response) => {
       if (response.status == 223) {
         alert(response.data)
