@@ -25,11 +25,11 @@
       <div id="skillWrapper">
         <div
           v-for="userSkill in skillStore.userSkills"
-          :key="userSkill.id"
+          :key="userSkill.prop_link_id"
           style="display: inline-grid"
         >
           <div>
-            <div class="myBtn" @click="removeSkill(userSkill.id)">
+            <div class="myBtn" @click="removeSkill(userSkill.prop_link_id)">
               {{ userSkill.skill }} <i class="fa fa-minus-circle"></i>
             </div>
           </div>
@@ -57,9 +57,6 @@ function addSkill(skill_id) {
       else if (response.status != 200) {
         alert('unhandled error');
       }
-      else {
-        alert('record added')
-      }
     })
     .catch(error => {
       if (error.response.data.errors) {
@@ -68,8 +65,10 @@ function addSkill(skill_id) {
         alert('unhandled error');
       }
     })
+    store.initialiseComponents()
 }
 function removeSkill(skill_id) {
+  console.log(skill_id);
   personService.removeSkillFromPerson(store.person,skill_id).then(
     (response) => {
       if (response.status == 223) {
@@ -78,9 +77,6 @@ function removeSkill(skill_id) {
       else if (response.status != 200) {
         alert('unhandled error');
       }
-      else {
-        alert('record added')
-      }
     })
     .catch(error => {
       if (error.response.data.errors) {
@@ -89,6 +85,8 @@ function removeSkill(skill_id) {
         alert('unhandled error');
       }
     })
+        store.initialiseComponents()
+
 }
 
 
