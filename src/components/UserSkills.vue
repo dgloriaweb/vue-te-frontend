@@ -70,7 +70,25 @@ function addSkill(skill_id) {
     })
 }
 function removeSkill(skill_id) {
-  console.log(skill_id);
+  personService.removeSkillFromPerson(store.person,skill_id).then(
+    (response) => {
+      if (response.status == 223) {
+        alert(response.data)
+      }
+      else if (response.status != 200) {
+        alert('unhandled error');
+      }
+      else {
+        alert('record added')
+      }
+    })
+    .catch(error => {
+      if (error.response.data.errors) {
+        alert(error.response.data.errors);
+      } else {
+        alert('unhandled error');
+      }
+    })
 }
 
 
