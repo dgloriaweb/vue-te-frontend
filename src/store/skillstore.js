@@ -8,14 +8,14 @@ import { defineStore } from 'pinia'
 export const useSkillStore = defineStore('skills', {
   state: () => ({
     userSkills: null,
-    skills: null,
+    skills: null, //all available skills
   }),
   getters: {
     getUserSkills(state) {
       return state.userSkills
     },
     getSkills(state) {
-      return state.userSkills
+      return state.skills
     },
   },
   actions: {
