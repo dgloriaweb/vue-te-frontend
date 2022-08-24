@@ -20,6 +20,7 @@ export const useSkillStore = defineStore('skills', {
   },
   actions: {
     setUserSkills() {
+      console.log('setting user skills');
       personService.getPersonSkills().then((response) => {
         this.userSkills = response.data
       })
@@ -31,6 +32,7 @@ export const useSkillStore = defineStore('skills', {
 
     //all skills
     setSkills() {
+      console.log('setting all skills');
       skillService.getSkillsGrouped().then((response) => {
         console.log(response);
         if(response.data){
