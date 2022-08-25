@@ -14,6 +14,19 @@ class JobService {
       console.log(error)
     }
   }
+  setJob = async (job) => {
+    try {
+      const url = process.env.VUE_APP_API_URL + '/api/jobs/' + job.id
+      const response = await axios({
+        method: 'post',
+        url: url,
+        headers: authService.getApiHeaders()
+      })
+      return response
+    } catch (error) {
+      alert('error in updatePerson: '.error)
+    }
+  }
   setJobSummaryData = async () => {
     try {
       const store = useStore()

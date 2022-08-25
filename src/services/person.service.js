@@ -33,12 +33,11 @@ class PersonService {
   //setters
   updatePerson = async (person) => {
     const store = useStore()
-    console.log(typeof person)
     try {
-      const myurl = process.env.VUE_APP_API_URL + '/api/people/' + person.id
+      const url = process.env.VUE_APP_API_URL + '/api/people/' + person.id
       const response = await axios({
         method: 'post',
-        url: myurl,
+        url: url,
         headers: authService.getApiHeaders(),
         params: {
           userId: store.userId,

@@ -2,7 +2,9 @@
   <div v-if="!jobStore?.job">This job doesn't exist</div>
   <div v-if="jobStore?.job">
     <h1>{{ jobStore.job.job_name }}</h1>
-
+    <router-link :to="{ name: 'jobDetailEdit' }" class="jobDetailEdit_btn"
+      >Edit skillset (admin)</router-link
+    >
     <h2>Position Specifics</h2>
     <h3>Usual work location</h3>
     <div>
