@@ -57,6 +57,7 @@ function addSkill(skill_id) {
       else if (response.status != 200) {
         alert('unhandled error');
       }
+       store.initialiseComponents()
     })
     .catch(error => {
       if (error.response.data.errors) {
@@ -65,7 +66,6 @@ function addSkill(skill_id) {
         alert('unhandled error');
       }
     })
-    store.initialiseComponents()
 }
 function removeSkill(skill_id) {
   console.log(skill_id);
