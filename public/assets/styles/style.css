@@ -10,8 +10,8 @@ body {
 }
 
 :root {
-  --main-blue: #2D9CDB;
-  --secondary-grey: #7A8F9B;
+  --main-blue: rgb(45, 156, 219);
+  --secondary-grey: rgb(122, 143, 155);
 }
 
 body {
@@ -19,6 +19,10 @@ body {
   font-family: 'Overpass', sans-serif;
 }
 
+a {
+  text-decoration: none;
+  width: fit-content;
+}
 
 .wrapper {
   max-width: 1600px;
@@ -77,6 +81,26 @@ body {
 .btn {
   border-radius: 7px;
   padding: 6px 12px;
+  appearance: auto;
+  writing-mode: horizontal-tb;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  border-width: 2px;
+  border-style: outset;
+}
+
+.btn:hover {
+  opacity: 0.9;
 }
 
 .btn_primary {
@@ -145,7 +169,8 @@ h6 {
     height: 60px;
   }
 }
-.form_control{
+
+.form_control {
   display: block;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -161,7 +186,32 @@ h6 {
   border-radius: 0.4rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.form_group{
-  margin-top:1rem;
-  margin-bottom:0.5rem;
+
+.form_group {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-check-input {
+  width: 1em;
+  height: 1em;
+  margin-top: 0.25em;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.form-check-input:checked[type=checkbox] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+
+.form-check-input:checked {
+  background-color: var(--main-blue);
+  border-color: var(--main-blue);
 }
