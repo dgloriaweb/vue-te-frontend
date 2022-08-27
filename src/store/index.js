@@ -34,16 +34,17 @@ export const useStore = defineStore('main', {
       this.setLoggedInStatus()
       if (this.isLoggedIn) {
         jobStore.setJobSummaryData()
+
+        //skills
+        const skillStore = useSkillStore()
+        //set user skills
+        skillStore.setUserSkills()
+        //set all skills
+        skillStore.setSkills()
+        // set person
+        this.setPerson()
       }
 
-      //skills
-      const skillStore = useSkillStore()
-      //set user skills
-      skillStore.setUserSkills()
-      //set all skills
-      skillStore.setSkills()
-      // set person
-      this.setPerson()
     },
     setAccessToken() {
       let storedUser = JSON.parse(localStorage.getItem('user'))
@@ -57,7 +58,7 @@ export const useStore = defineStore('main', {
       personService.getPersonByUserId().then((response) => {
         this.person = response.data
       })
-    
+
     },
     setLoggedInStatus() {
       this.setAccessToken()

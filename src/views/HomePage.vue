@@ -1,5 +1,5 @@
 <template>
-  <div  v-if="!jobStore.personUpdated">
+  <div class="wrapper" v-if="!jobStore.personUpdated">
     <h1>Find your true calling!</h1>
     </div>
   <div id="myGridContainer" v-if="jobStore.personUpdated">

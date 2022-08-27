@@ -1,30 +1,38 @@
 <template>
-  <div>
-    <div>
+  <div class="wrapper">
+    <div class="form_group">
       <label for="name">Name</label>
       <br />
-      <input name="name" type="text" v-model="name" />
+      <input name="name" type="text" class="form_control" v-model="name" />
     </div>
-    <div>
+    <div class="form_group">
       <label for="email">Email</label>
       <br />
-      <input name="email" type="email" v-model="email" />
+      <input name="email" type="email" class="form_control" v-model="email" />
     </div>
-    <div>
+    <div class="form_group">
       <label for="password">Password</label>
       <br />
-      <input name="password" type="password" v-model="password" />
+      <input
+        name="password"
+        type="password"
+        class="form_control"
+        v-model="password"
+      />
     </div>
-    <div>
+    <div class="form_group">
       <label for="password_confirmation">Confirm Password</label>
       <br />
       <input
         name="password_confirmation"
         type="password"
         v-model="password_confirmation"
+        class="form_control"
       />
     </div>
-    <button @click="validate">Sign Up</button>
+    <div class="form_group">
+      <button class="btn btn_primary" @click="validate">Sign Up</button>
+      </div>
   </div>
 </template>
 

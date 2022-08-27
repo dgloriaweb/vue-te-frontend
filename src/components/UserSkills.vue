@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="container" class="wrapper">
     <div id="left-side">
       <h1>All Skills</h1>
       <div id="skillWrapper">

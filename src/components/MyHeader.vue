@@ -13,9 +13,9 @@
       <div @click="login" v-if="!store.isLoggedIn">
         <i class="fa-solid fa-user"></i> Login / Register
       </div>
-      <div @click="register" v-if="!store.isLoggedIn">
+      <!-- <div @click="register" v-if="!store.isLoggedIn">
         <i class="fa-solid fa-user"></i> Register
-      </div>
+      </div> -->
 
   </div>
 </template>
@@ -43,9 +43,9 @@ function logout() {
 function login() {
   route.push('/login')
 }
-function register() {
-  route.push('/register')
-}
+// function register() {
+//   route.push('/register')
+// }
 
 onMounted(() => {
   store.initialiseComponents()
