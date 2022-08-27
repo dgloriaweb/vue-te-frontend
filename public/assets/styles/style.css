@@ -1,8 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-html{
+html {
   font-family: "Open Sans";
 }
+
+:root {
+  --main-blue: #2D9CDB;
+  --secondary-grey: #7A8F9B;
+}
+
+body {
+  margin: 0;
+  font-family: 'Overpass', sans-serif;
+}
+
 #wrapper {
   background: #383838;
   max-width: 1600px;
@@ -10,40 +21,118 @@ html{
   margin: auto;
   min-height: 90vh;
 }
+
 .red-text {
   color: red;
 }
+
 .green-text {
   color: green;
 }
-.danger{
-  color:red;
+
+.danger {
+  color: red;
   background-color: rgb(255, 205, 205);
 }
-.success{
-  color:green;
+
+.success {
+  color: green;
   background-color: rgb(205, 255, 205);
 }
 
 #myGridContainer {
-    width: fit-content;
-    display: flex;
-    gap: 35px;
+  width: fit-content;
+  display: flex;
+  gap: 35px;
+}
+
+#myGridColumn {
+  padding: 15px;
+}
+
+#myGridRow {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  padding: 10px;
+}
+
+.grid-cell-1 {
+  width: max-content;
+}
+
+.grid-cell-2 {
+  text-align: right;
+}
+
+.grid-cell-2:after {
+  content: "%";
+}
+
+.btn {
+  border-radius: 7px;
+  padding: 6px 12px;
+}
+
+.btn-primary {
+  color: white;
+  background-color: var(--main-blue);
+  border-color: var(--main-blue);
+}
+
+.btn-secondary {
+  color: white;
+  background-color: var(--secondary-grey);
+  border-color: var(--secondary-grey);
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#header {
+  padding:10px;
+  background-color: var(--main-blue);
+  color: white;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#logo_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media(max-width:1000px){
+/* ratio: 10x3 */
+  #logo_text{
+    width:200px;
+    height:60px; 
   }
-  #myGridColumn {
-    padding: 15px;
-  }
-  #myGridRow {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    padding: 10px;
-  }
-  .grid-cell-1 {
-    width: max-content;
-  }
-  .grid-cell-2 {
-    text-align: right;
-  }
-  .grid-cell-2:after {
-    content: "%";
-  }
+}

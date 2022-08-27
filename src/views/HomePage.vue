@@ -135,7 +135,7 @@
             v-model="jobStore.personUpdated.other_shift_only"
           />
           <label for="other_shift_onlyChk"
-            >Want to do ther shift only (eg. late afternoons)</label
+            >Want to do other shift only (eg. late afternoons)</label
           >
           <br />
           <h3>Other</h3>
