@@ -215,7 +215,8 @@ function storePersonData() {
         // alert('settings updated')
         hideModal()
         // change modal and show confirm message
-
+        // update rates
+        jobStore.setJobSummaryData()
       }
     })
     .catch(error => {
