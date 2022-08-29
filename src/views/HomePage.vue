@@ -1,175 +1,180 @@
 <template>
-  <div class="wrapper" v-if="!jobStore.personUpdated">
-    <h1>Find your true calling!</h1>
-  </div>
-  <div class="myGridContainer" v-if="jobStore.personUpdated">
-    <div class="myGridColumn" v-if="jobStore.match_rates">
-      <h2>Results</h2>
-      <div id="ratesContainer">
-        <div v-for="job in jobStore.match_rates" :key="job.id" id="myGridRow">
-          <div class="grid-cell-1">
-            <router-link :to="{ name: 'jobDetail', params: { id: job.id } }" class="job_name">
-              {{ job.job_name }}
-            </router-link>
+  <div class="wrapper">
+    <div v-if="!jobStore.personUpdated">
+      <h1>Find your true calling!</h1>
+    </div>
+    <div class="myGridContainer" v-if="jobStore.personUpdated">
+      <div class="myGridColumn" v-if="jobStore.match_rates">
+        <h2>Results</h2>
+        <div id="ratesContainer">
+          <div v-for="job in jobStore.match_rates" :key="job.id" id="myGridRow">
+            <div class="grid-cell-1">
+              <router-link
+                :to="{ name: 'jobDetail', params: { id: job.id } }"
+                class="job_name"
+              >
+                {{ job.job_name }}
+              </router-link>
+            </div>
+            <div class="grid-cell-2">
+              {{ job.job_rate }}
+            </div>
           </div>
-          <div class="grid-cell-2">
-            {{ job.job_rate }}
-          </div>
+          <router-link :to="{ name: 'matchRates' }" class="btn btn_primary">
+            See all
+          </router-link>
         </div>
-         <router-link :to="{ name: 'matchRates' }" class="btn btn_primary">
-      See all
-    </router-link>
       </div>
-    </div>
-    <div class="myGridColumn" v-if="jobStore.personUpdated">
-      <h3>Usual work location</h3>
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="workplace"
-        id="workplaceChk"
-        v-model="jobStore.personUpdated.workplace"
-      />
-      <label for="workplaceChk">I want to work at the workplace</label>
-      <br />
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="remote"
-        id="remoteChk"
-        v-model="jobStore.personUpdated.remote"
-      />
-      <label for="remoteChk">I want to work remotely</label>
-      <br />
-      <br />
-      <h3>Overtime</h3>
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="overtime"
-        id="overtimeChk"
-        v-model="jobStore.personUpdated.overtime"
-      />
-      <label for="overtimeChk">Want to do jobs that has overtime</label>
-    </div>
-    <div class="myGridColumn">
-      <h3>Usual working days</h3>
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="workdays"
-        id="workdaysChk"
-        v-model="jobStore.personUpdated.workdays"
-      />
-      <label for="workdaysChk">I want to work workdays</label>
-      <br />
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="saturday"
-        id="saturdayChk"
-        v-model="jobStore.personUpdated.saturday"
-      />
-      <label for="saturdayChk">Can do Saturdays</label>
-      <br />
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="sunday"
-        id="sundayChk"
-        v-model="jobStore.personUpdated.sunday"
-      />
-      <label for="sundayChk">Can do Sundays</label>
-      <br />
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="bank_holidays"
-        id="bank_holidaysChk"
-        v-model="jobStore.personUpdated.bank_holidays"
-      />
-      <label for="bank_holidaysChk">Can do bank holidays</label>
-      <br />
-      <h4>Special working days</h4>
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="sat_sun_bh_only"
-        id="sat_sun_bh_onlyChk"
-        v-model="jobStore.personUpdated.sat_sun_bh_only"
-      />
-      <label for="sat_sun_bh_onlyChk"
-        >want to work only Saturdays, Sundays and Bank holidays</label
-      >
-      <br />
-    </div>
-    <div class="myGridColumn">
-      <h3>Usual working hours</h3>
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="normal_hours"
-        id="normal_hoursChk"
-        v-model="jobStore.personUpdated.normal_hours"
-      />
-      <label for="normal_hoursChk">Want to work normal hours</label>
-      <br />
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="nightshift"
-        id="nightshiftChk"
-        v-model="jobStore.personUpdated.nightshift"
-      />
-      <label for="nightshiftChk">Can do nightshift</label>
-      <br />
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="other_shift"
-        id="other_shiftChk"
-        v-model="jobStore.personUpdated.other_shift"
-      />
-      <label for="other_shiftChk">Can do other shift</label>
-      <br />
+      <div class="myGridColumn" v-if="jobStore.personUpdated">
+        <h3>Usual work location</h3>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="workplace"
+          id="workplaceChk"
+          v-model="jobStore.personUpdated.workplace"
+        />
+        <label for="workplaceChk">I want to work at the workplace</label>
+        <br />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="remote"
+          id="remoteChk"
+          v-model="jobStore.personUpdated.remote"
+        />
+        <label for="remoteChk">I want to work remotely</label>
+        <br />
+        <br />
+        <h3>Overtime</h3>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="overtime"
+          id="overtimeChk"
+          v-model="jobStore.personUpdated.overtime"
+        />
+        <label for="overtimeChk">Want to do jobs that has overtime</label>
+      </div>
+      <div class="myGridColumn">
+        <h3>Usual working days</h3>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="workdays"
+          id="workdaysChk"
+          v-model="jobStore.personUpdated.workdays"
+        />
+        <label for="workdaysChk">I want to work workdays</label>
+        <br />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="saturday"
+          id="saturdayChk"
+          v-model="jobStore.personUpdated.saturday"
+        />
+        <label for="saturdayChk">Can do Saturdays</label>
+        <br />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="sunday"
+          id="sundayChk"
+          v-model="jobStore.personUpdated.sunday"
+        />
+        <label for="sundayChk">Can do Sundays</label>
+        <br />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="bank_holidays"
+          id="bank_holidaysChk"
+          v-model="jobStore.personUpdated.bank_holidays"
+        />
+        <label for="bank_holidaysChk">Can do bank holidays</label>
+        <br />
+        <h4>Special working days</h4>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="sat_sun_bh_only"
+          id="sat_sun_bh_onlyChk"
+          v-model="jobStore.personUpdated.sat_sun_bh_only"
+        />
+        <label for="sat_sun_bh_onlyChk"
+          >want to work only Saturdays, Sundays and Bank holidays</label
+        >
+        <br />
+      </div>
+      <div class="myGridColumn">
+        <h3>Usual working hours</h3>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="normal_hours"
+          id="normal_hoursChk"
+          v-model="jobStore.personUpdated.normal_hours"
+        />
+        <label for="normal_hoursChk">Want to work normal hours</label>
+        <br />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="nightshift"
+          id="nightshiftChk"
+          v-model="jobStore.personUpdated.nightshift"
+        />
+        <label for="nightshiftChk">Can do nightshift</label>
+        <br />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="other_shift"
+          id="other_shiftChk"
+          v-model="jobStore.personUpdated.other_shift"
+        />
+        <label for="other_shiftChk">Can do other shift</label>
+        <br />
 
-      <h4>Special working hours</h4>
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="nightshift_only"
-        id="nightshift_onlyChk"
-        v-model="jobStore.personUpdated.nightshift_only"
-      />
-      <label for="nightshift_onlyChk">Want to do nightshift only</label>
-      <br />
-      <input
-        type="checkbox"
-        class="form-check-input"
-        name="other_shift_only"
-        id="other_shift_onlyChk"
-        v-model="jobStore.personUpdated.other_shift_only"
-      />
-      <label for="other_shift_onlyChk"
-        >Want to do other shift only (eg. late afternoons)</label
-      >
-      <br />
-      <button id="show-modal" class="btn btn_primary" @click="showModalFunc">
-        Store settings
-      </button>
-    </div>
+        <h4>Special working hours</h4>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="nightshift_only"
+          id="nightshift_onlyChk"
+          v-model="jobStore.personUpdated.nightshift_only"
+        />
+        <label for="nightshift_onlyChk">Want to do nightshift only</label>
+        <br />
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="other_shift_only"
+          id="other_shift_onlyChk"
+          v-model="jobStore.personUpdated.other_shift_only"
+        />
+        <label for="other_shift_onlyChk"
+          >Want to do other shift only (eg. late afternoons)</label
+        >
+        <br />
+        <button id="show-modal" class="btn btn_primary" @click="showModalFunc">
+          Store settings
+        </button>
+      </div>
 
-    <router-link :to="{ name: 'userSkills' }" class="btn btn_primary">
-      Go to my skills
-    </router-link>
+      <router-link :to="{ name: 'userSkills' }" class="btn btn_primary">
+        Go to my skills
+      </router-link>
+    </div>
+    <ModalComponent
+      :show="showModal"
+      :modalBody="modalBodyText"
+      :modalHeader="modalHeaderText"
+      @close="hideModal"
+      @submitModal="confirmPersonSettingChanges()"
+    />
   </div>
-  <ModalComponent
-    :show="showModal"
-    :modalBody="modalBodyText"
-    :modalHeader="modalHeaderText"
-    @close="hideModal"
-    @submitModal="confirmPersonSettingChanges()"
-  />
 </template>
 
 <script setup>
