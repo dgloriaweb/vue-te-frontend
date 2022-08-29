@@ -26,7 +26,8 @@ export const useJobStore = defineStore('jobs', {
       jobService
       .setJobSummaryData()
       .then((response) => {
-        this.match_rates = response.data.all_job_match_rates
+        this.all_match_rates = response.data.all_job_match_rates
+        this.match_rates = response.data.job_match_rates
         this.personUpdated = response.data.person
         // ** change all numeric values to true or false would make errors in id fields. Exclude these.
         // this results an array like ['nightshift_only', 0]
