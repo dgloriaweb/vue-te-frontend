@@ -8,7 +8,7 @@
       <div id="ratesContainer">
         <div v-for="job in jobStore.match_rates" :key="job.id" id="myGridRow">
           <div class="grid-cell-1">
-            <router-link :to="{ name: 'jobDetail', params: { id: job.id } }">
+            <router-link :to="{ name: 'jobDetail', params: { id: job.id } }" class="job_name">
               {{ job.job_name }}
             </router-link>
           </div>
@@ -16,6 +16,9 @@
             {{ job.job_rate }}
           </div>
         </div>
+         <router-link :to="{ name: 'matchRates' }" class="btn btn_primary">
+      See all
+    </router-link>
       </div>
     </div>
     <div class="myGridColumn" v-if="jobStore.personUpdated">
@@ -204,8 +207,10 @@ function storePersonData() {
         alert('unhandled error');
       }
       else {
-        alert('settings updated')
+        // alert('settings updated')
         hideModal()
+        // change modal and show confirm message
+
       }
     })
     .catch(error => {
