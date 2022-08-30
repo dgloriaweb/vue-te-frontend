@@ -27,11 +27,10 @@ class AuthService {
       .post(process.env.VUE_APP_API_URL + '/api/login', headers)
       .then((response) => {
         if (response.data.token) {
-          alert('login successful')
           var userCredentials = JSON.stringify(response.data)
           store.setUserInLocalStore(userCredentials)
         }
-        store.initialiseComponents()
+        setTimeout(store.initialiseComponents(),500)
       })
       .catch((error) => {
         if (error?.response?.data?.errors) {
@@ -59,7 +58,7 @@ class AuthService {
         if (response.data.token) {
           alert('registration successful')
           var userCredentials = JSON.stringify(response.data)
-          store.setUserInLocalStore(userCredentials)
+          setTimeout(store.setUserInLocalStore(userCredentials),500)
         }
         return response
       })

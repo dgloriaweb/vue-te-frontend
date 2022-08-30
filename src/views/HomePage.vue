@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
-    <div v-if="!jobStore.personUpdated">
+    <div v-if="!store.isLoggedIn">
       <h1>Find your true calling!</h1>
+      <p>Please login to continue</p>
     </div>
     <div class="myGridContainer" v-if="jobStore.personUpdated">
       <div class="myGridColumn" v-if="jobStore.match_rates">
@@ -191,13 +192,14 @@
 </template>
 
 <script setup>
-// import { useStore } from '@/store/index'
+import { useStore } from '@/store/index'
 import { useJobStore } from '../store/jobstore'
 import personService from '../services/person.service'
 import ModalComponent from '@/components/ModalComponent'
-import { ref } from 'vue'
+import {  ref } from 'vue'
 
 const jobStore = useJobStore()
+const store = useStore()
 
 let showModal = ref(false)
 let modalHeaderText = "Confirm Changes"
@@ -325,7 +327,7 @@ function checkNormalhours(e) {
   if (e.target.checked) {
     jobStore.personUpdated.nightshift_only = false
     jobStore.personUpdated.other_shift_only = false
-  } else if(jobStore.personUpdated.other_shift_only == 0){
+  } else if (jobStore.personUpdated.other_shift_only == 0) {
     jobStore.personUpdated.nightshift = true
   }
 }
@@ -364,10 +366,11 @@ function checkNightshift(e) {
     }
   } else if (jobStore.personUpdated.other_shift == 1) {
     jobStore.personUpdated.other_shift_only = true
-  } else if (jobStore.personUpdated.normal_hours == 1){
+  } else if (jobStore.personUpdated.normal_hours == 1) {
     jobStore.personUpdated.nightshift_only = false
   }
 }
+
 
 </script>
 
