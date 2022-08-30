@@ -30,7 +30,7 @@ class AuthService {
           var userCredentials = JSON.stringify(response.data)
           store.setUserInLocalStore(userCredentials)
         }
-        setTimeout(store.initialiseComponents(),500)
+        setTimeout(store.initialiseComponents(),1000)
       })
       .catch((error) => {
         if (error?.response?.data?.errors) {
@@ -58,7 +58,7 @@ class AuthService {
         if (response.data.token) {
           alert('registration successful')
           var userCredentials = JSON.stringify(response.data)
-          setTimeout(store.setUserInLocalStore(userCredentials),500)
+          setTimeout(store.setUserInLocalStore(userCredentials),1000)
         }
         return response
       })

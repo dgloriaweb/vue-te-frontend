@@ -46,6 +46,17 @@ export const useStore = defineStore('main', {
       }
 
     },
+    refreshSkills() {
+      if (this.isLoggedIn) {
+        //skills
+        const skillStore = useSkillStore()
+        //set user skills
+        skillStore.setUserSkills()
+        //set all skills
+        skillStore.setSkills()
+      }
+
+    },
     setAccessToken() {
       let storedUser = JSON.parse(localStorage.getItem('user'))
       this.access_token = storedUser?.token
