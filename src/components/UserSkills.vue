@@ -37,7 +37,6 @@
       </div>
     </div>
   </div>
- 
 </template>
 
 <script setup>
@@ -49,7 +48,7 @@ const store = useStore()
 
 
 function addSkill(skill_id) {
-  personService.addSkillToPerson(store.person,skill_id).then(
+  personService.addSkillToPerson(store.person, skill_id).then(
     (response) => {
       if (response.status == 223) {
         alert(response.data)
@@ -57,7 +56,7 @@ function addSkill(skill_id) {
       else if (response.status != 200) {
         alert('unhandled error');
       }
-       store.refreshSkills()
+      store.refreshSkills()
     })
     .catch(error => {
       if (error.response.data.errors) {
@@ -69,7 +68,7 @@ function addSkill(skill_id) {
 }
 function removeSkill(skill_id) {
   console.log(skill_id);
-  personService.removeSkillFromPerson(store.person,skill_id).then(
+  personService.removeSkillFromPerson(store.person, skill_id).then(
     (response) => {
       if (response.status == 223) {
         alert(response.data)
@@ -77,6 +76,7 @@ function removeSkill(skill_id) {
       else if (response.status != 200) {
         alert('unhandled error');
       }
+      store.refreshSkills()
     })
     .catch(error => {
       if (error.response.data.errors) {
@@ -85,7 +85,6 @@ function removeSkill(skill_id) {
         alert('unhandled error');
       }
     })
-        store.refreshSkills()
 
 }
 
