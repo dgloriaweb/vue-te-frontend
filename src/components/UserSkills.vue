@@ -1,6 +1,9 @@
 <template>
   <div id="container" class="wrapper">
     <div id="left-side">
+      <button @click="routeHome" class="btn btn_primary">
+        Save and return home
+      </button>
       <h1>All Skills</h1>
       <div id="skillWrapper">
         <div v-for="(value, key) in skillStore.skillsArray" :key="key">
@@ -40,13 +43,29 @@
 </template>
 
 <script setup>
-// import personService from '@/services/person.service';
+import personService from '@/services/person.service';
 import { useSkillStore } from '../store/skillstore'
-// import { useStore } from '@/store/index'
+import { useStore } from '@/store/index'
+import { useRouter } from 'vue-router'
+
+const route = useRouter()
 const skillStore = useSkillStore()
-// const store = useStore()
+const store = useStore()
 
-
+function routeHome() {
+  // save data to backend
+  // get the skill id's that are still available
+  var mySkills = skillStore.userSkillsArray.values();
+  var mySkillsList = ""
+  for (const value of mySkills) {
+    if (mySkillsList != "") {
+      mySkillsList += ","
+    }
+    mySkillsList += (value["id"]);
+  }
+  personService.updateUserSkills(store.person, mySkillsList)
+  route.push('/')
+}
 
 /* *************************************
 this part is tricky, handle with care!!! 
@@ -66,7 +85,7 @@ function addSkill(key, skill) {
 
 }
 function removeSkill(userSkill) {
-
+  console.log(userSkill["id"])
   // filter out object with this skill id
   skillStore.userSkillsArray = Object.values(skillStore.userSkillsArray).filter((item) => item["id"] != userSkill["id"])
 
@@ -77,10 +96,9 @@ function removeSkill(userSkill) {
     "skill": userSkill["skill"]
   }
   skillStore.skillsArray[userSkill["core_skill"]].push(object)
-  console.log(skillStore.skillsArray[userSkill["core_skill"]]);
 }
 /* *************************************
-this part is tricky, handle with care!!! 
+this part is tricky, handle with care!!!
 ************************************* */
 
 
