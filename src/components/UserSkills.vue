@@ -3,7 +3,7 @@
     <div id="left-side">
       <h1>All Skills</h1>
       <div id="skillWrapper">
-        <div v-for="(value, key) in skillStore.skills" :key="key">
+        <div v-for="(value, key) in skillStore.skillsArray" :key="key">
           <div>
             <b>{{ key }}</b>
           </div>
@@ -13,7 +13,7 @@
             id="skillLoop"
             style="display: inline-grid"
           >
-            <div class="myBtn" @click="addSkill(skill.id)">
+            <div class="myBtn" @click="addSkill(key, skill)">
               {{ skill.skill }} <i class="fa fa-plus-circle"></i>
             </div>
           </div>
@@ -24,12 +24,12 @@
       <h1>Your Skills</h1>
       <div id="skillWrapper">
         <div
-          v-for="userSkill in skillStore.userSkills"
+          v-for="userSkill in skillStore.userSkillsArray"
           :key="userSkill.prop_link_id"
           style="display: inline-grid"
         >
           <div>
-            <div class="myBtn" @click="removeSkill(userSkill.prop_link_id)">
+            <div class="myBtn" @click="removeSkill(userSkill)">
               {{ userSkill.skill }} <i class="fa fa-minus-circle"></i>
             </div>
           </div>
@@ -40,51 +40,41 @@
 </template>
 
 <script setup>
-import personService from '@/services/person.service';
+// import personService from '@/services/person.service';
 import { useSkillStore } from '../store/skillstore'
-import { useStore } from '@/store/index'
+// import { useStore } from '@/store/index'
 const skillStore = useSkillStore()
-const store = useStore()
+// const store = useStore()
 
 
-function addSkill(skill_id) {
-  personService.addSkillToPerson(store.person, skill_id).then(
-    (response) => {
-      if (response.status == 223) {
-        alert(response.data)
-      }
-      else if (response.status != 200) {
-        alert('unhandled error');
-      }
-      store.refreshSkills()
-    })
-    .catch(error => {
-      if (error.response.data.errors) {
-        alert(error.response.data.errors);
-      } else {
-        alert('unhandled error');
-      }
-    })
+function addSkill(key, skill) {
+
+  var object = {
+    "id": skill["id"],
+    "skill": skill["skill"],
+    "core_skill": key
+  }
+  skillStore.userSkillsArray.push(object)
+
+  //remove item from skillsArray
+  var myItem = Object.entries(skillStore.skillsArray).find((item) => item.includes(key)) // find items in this core skill category
+  skillStore.skillsArray[key] = Object.values(myItem[1]).filter((item) => item["id"] != skill["id"]); // filter out the selected one and return remaining
+
 }
-function removeSkill(skill_id) {
-  console.log(skill_id);
-  personService.removeSkillFromPerson(store.person, skill_id).then(
-    (response) => {
-      if (response.status == 223) {
-        alert(response.data)
-      }
-      else if (response.status != 200) {
-        alert('unhandled error');
-      }
-      store.refreshSkills()
-    })
-    .catch(error => {
-      if (error.response.data.errors) {
-        alert(error.response.data.errors);
-      } else {
-        alert('unhandled error');
-      }
-    })
+function removeSkill(userSkill) {
+
+  // filter out object with this skill id
+  skillStore.userSkillsArray = Object.values(skillStore.userSkillsArray).filter((item) => item["id"] != userSkill["id"])
+
+  // find the corresponding core_skill in the skillsArray
+  // var myItem = Object.entries(skillStore.skillsArray).find((item) => item.includes(userSkill["core_skill"]))
+    // add these data as array item to the skillsArray 
+  var object = {
+    "id": userSkill["id"],
+    "skill": userSkill["skill"]
+  }
+  skillStore.skillsArray[userSkill["core_skill"]].push(object)
+  console.log(skillStore.skillsArray[userSkill["core_skill"]]);
 
 }
 
