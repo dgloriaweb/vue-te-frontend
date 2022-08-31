@@ -64,6 +64,8 @@ function routeHome() {
     mySkillsList += (value["id"]);
   }
   personService.updateUserSkills(store.person, mySkillsList)
+  store.initialiseComponents()
+
   route.push('/')
 }
 
