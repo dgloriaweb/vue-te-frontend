@@ -47,6 +47,10 @@ const skillStore = useSkillStore()
 // const store = useStore()
 
 
+
+/* *************************************
+this part is tricky, handle with care!!! 
+************************************* */
 function addSkill(key, skill) {
 
   var object = {
@@ -67,16 +71,18 @@ function removeSkill(userSkill) {
   skillStore.userSkillsArray = Object.values(skillStore.userSkillsArray).filter((item) => item["id"] != userSkill["id"])
 
   // find the corresponding core_skill in the skillsArray
-  // var myItem = Object.entries(skillStore.skillsArray).find((item) => item.includes(userSkill["core_skill"]))
-    // add these data as array item to the skillsArray 
+  // add these data as array item to the skillsArray 
   var object = {
     "id": userSkill["id"],
     "skill": userSkill["skill"]
   }
   skillStore.skillsArray[userSkill["core_skill"]].push(object)
   console.log(skillStore.skillsArray[userSkill["core_skill"]]);
-
 }
+/* *************************************
+this part is tricky, handle with care!!! 
+************************************* */
+
 
 
 </script>
