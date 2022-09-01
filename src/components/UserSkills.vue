@@ -6,7 +6,7 @@
       </button>
       <h1>All Skills</h1>
       <div id="skillWrapper">
-        <div v-for="(value, key) in skillStore.skillsArray" :key="key">
+        <div v-for="(value, key) in skillStore.skills" :key="key">
           <div>
             <b>{{ key }}</b>
           </div>
@@ -27,7 +27,7 @@
       <h1>Your Skills</h1>
       <div id="skillWrapper">
         <div
-          v-for="userSkill in skillStore.userSkillsArray"
+          v-for="userSkill in skillStore.userSkills"
           :key="userSkill.prop_link_id"
           style="display: inline-grid"
         >
@@ -55,7 +55,7 @@ const store = useStore()
 function routeHome() {
   // save data to backend
   // get the skill id's that are still available
-  var mySkills = skillStore.userSkillsArray.values();
+  var mySkills = skillStore.userSkills.values();
   var mySkillsList = ""
   for (const value of mySkills) {
     if (mySkillsList != "") {
@@ -79,25 +79,29 @@ function addSkill(key, skill) {
     "skill": skill["skill"],
     "core_skill": key
   }
-  skillStore.userSkillsArray.push(object)
+  skillStore.userSkills.push(object)
 
-  //remove item from skillsArray
-  var myItem = Object.entries(skillStore.skillsArray).find((item) => item.includes(key)) // find items in this core skill category
-  skillStore.skillsArray[key] = Object.values(myItem[1]).filter((item) => item["id"] != skill["id"]); // filter out the selected one and return remaining
+  //remove item from skills
+  var myItem = Object.entries(skillStore.skills).find((item) => item.includes(key)) // find items in this core skill category
+  skillStore.skills[key] = Object.values(myItem[1]).filter((item) => item["id"] != skill["id"]); // filter out the selected one and return remaining
 
 }
 function removeSkill(userSkill) {
   console.log(userSkill["id"])
   // filter out object with this skill id
-  skillStore.userSkillsArray = Object.values(skillStore.userSkillsArray).filter((item) => item["id"] != userSkill["id"])
+  skillStore.userSkills = Object.values(skillStore.userSkills).filter((item) => item["id"] != userSkill["id"])
 
-  // find the corresponding core_skill in the skillsArray
-  // add these data as array item to the skillsArray 
+  // find the corresponding core_skill in the skills
+  // add these data as array item to the skills 
   var object = {
     "id": userSkill["id"],
     "skill": userSkill["skill"]
   }
-  skillStore.skillsArray[userSkill["core_skill"]].push(object)
+
+  skillStore.addSkill(userSkill["core_skill"],object)
+
+  // 14 has no core skill! Need to fix those which don't have a core skill
+
 }
 /* *************************************
 this part is tricky, handle with care!!!
