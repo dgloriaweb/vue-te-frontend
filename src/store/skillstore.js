@@ -38,9 +38,6 @@ export const useSkillStore = defineStore('skills', {
         }
       })
     },
-    addSkill(coreSkill, myObject){
-      console.log(myObject)
-      Object.keys(this.skills).find((item)=> item == coreSkill).push(myObject)
-    }
+   
   },
 })

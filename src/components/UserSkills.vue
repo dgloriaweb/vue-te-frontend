@@ -48,6 +48,7 @@ import { useSkillStore } from '../store/skillstore'
 import { useStore } from '@/store/index'
 import { useRouter } from 'vue-router'
 
+
 const route = useRouter()
 const skillStore = useSkillStore()
 const store = useStore()
@@ -98,10 +99,10 @@ function removeSkill(userSkill) {
     "skill": userSkill["skill"]
   }
 
-  skillStore.addSkill(userSkill["core_skill"],object)
-
   // 14 has no core skill! Need to fix those which don't have a core skill
 
+  skillStore.skills[userSkill["core_skill"]] = Object.assign({}, object)
+  
 }
 /* *************************************
 this part is tricky, handle with care!!!
