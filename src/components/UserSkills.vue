@@ -100,9 +100,8 @@ function removeSkill(userSkill) {
   }
 
   // 14 has no core skill! Need to fix those which don't have a core skill
+  skillStore.skills[userSkill["core_skill"]].push(object)
 
-  skillStore.skills[userSkill["core_skill"]] = Object.assign({}, object)
-  
 }
 /* *************************************
 this part is tricky, handle with care!!!
