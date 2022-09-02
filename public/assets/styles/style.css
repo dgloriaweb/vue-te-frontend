@@ -165,7 +165,17 @@ h6 {
   position: sticky;
   top: 0;
 }
+#footer {
+  padding: 10px;
+  background-color: var(--main-blue);
+  color: white;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: 'Roboto Condensed', sans-serif;
 
+}
 #logo_wrapper {
   display: flex;
   align-items: center;
