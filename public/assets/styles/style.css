@@ -7,6 +7,11 @@ html {
 html,
 body {
   font-size: 16px;
+  height: 100%
+}
+
+#app {
+  height: 100%
 }
 
 :root {
@@ -32,6 +37,7 @@ a {
   width: 90vw;
   margin: auto;
   margin-block: 1rem;
+  min-height: calc(100% - 180px);
 }
 
 .red-text {
@@ -157,15 +163,24 @@ h6 {
   padding: 10px;
   background-color: var(--main-blue);
   color: white;
-  height: 96px;
+  height: 112px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   position: sticky;
   top: 0;
   box-shadow: 0 2px 40px 0 hsl(0deg 0% 6% / 5%);
 
 }
+
+@media(max-width:380px) {
+  #header {
+    padding-block: 3px;
+
+  }
+}
+
 #footer {
   padding: 10px;
   background-color: var(--main-blue);
@@ -177,8 +192,9 @@ h6 {
   position: sticky;
   bottom: 0;
   box-shadow: 0 2px 40px 0 hsl(0deg 0% 6% / 5%);
-
+  height: 21px;
 }
+
 #logo_wrapper {
   display: flex;
   align-items: center;
