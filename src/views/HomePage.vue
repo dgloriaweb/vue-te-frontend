@@ -2,7 +2,11 @@
   <div class="wrapper">
     <div v-if="!store.isLoggedIn">
       <h1>Find your true calling!</h1>
-      <h2>TalentExploit is a tool to find your career path by selecting your skills, working condition preferences, certifications, habits, hobbies, wishes, hopes and dreams.</h2>
+      <h2>
+        TalentExploit is a tool to find your career path by selecting your
+        skills, working condition preferences, certifications, habits, hobbies,
+        wishes, hopes and dreams.
+      </h2>
       <p>Please login to continue</p>
     </div>
     <div class="myGridContainer" v-if="jobStore.personUpdated">
@@ -173,14 +177,20 @@
           >Want to do other shift only (eg. late afternoons)</label
         >
         <br />
+        <br />
         <button id="show-modal" class="btn btn_primary" @click="showModalFunc">
           Store settings
         </button>
-      </div>
+        <div style="line-height:0.5rem">&nbsp;</div>
 
-      <router-link :to="{ name: 'userSkills' }" class="btn btn_primary">
-        Go to my skills
-      </router-link>
+        <router-link
+          :to="{ name: 'userSkills' }"
+          class="btn btn_primary"
+          style="margin-bottom: 5vh"
+        >
+          Go to my skills
+        </router-link>
+      </div>
     </div>
     <ModalComponent
       :show="showModal"
@@ -197,7 +207,7 @@ import { useStore } from '@/store/index'
 import { useJobStore } from '../store/jobstore'
 import personService from '../services/person.service'
 import ModalComponent from '@/components/ModalComponent'
-import {  ref } from 'vue'
+import { ref } from 'vue'
 
 const jobStore = useJobStore()
 const store = useStore()
