@@ -3,7 +3,6 @@ import HomePage from '../views/HomePage.vue'
 import Login from '../components/UserLogin.vue'
 import Register from '../components/UserRegister.vue'
 import UserSkills from '../components/UserSkills.vue'
-import JobDetailEdit from '../components/JobDetailEdit.vue'
 import MatchRates from '../components/MatchRates.vue'
 import JobDetail from '../views/JobDetail.vue'
 
@@ -32,12 +31,6 @@ const routes = [
     path: '/jobs/:id',
     name: 'jobDetail',
     component: JobDetail,
-    params: true,
-  },
-  {
-    path: '/jobs/:id/edit',
-    name: 'jobDetailEdit',
-    component: JobDetailEdit,
     params: true,
   },
   {
