@@ -2,6 +2,7 @@
   <div class="wrapper">
     <div v-if="!store.isLoggedIn">
       <h1>Find your true calling!</h1>
+      <h2>TalentExploit is a tool to find your career path by selecting your skills, working condition preferences, certifications, habits, hobbies, wishes, hopes and dreams.</h2>
       <p>Please login to continue</p>
     </div>
     <div class="myGridContainer" v-if="jobStore.personUpdated">
