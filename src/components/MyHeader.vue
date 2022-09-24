@@ -11,7 +11,7 @@
         <i class="fa-solid fa-user"></i> Logout
       </div>
       <div @click="login" v-if="!store.isLoggedIn" class="btn btn-secondary">
-        <i class="fa-solid fa-user"></i> Login / Register
+        <i class="fa-solid fa-user"></i> Login
       </div>
       <!-- <div @click="register" v-if="!store.isLoggedIn">
         <i class="fa-solid fa-user"></i> Register
