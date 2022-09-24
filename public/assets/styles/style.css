@@ -175,7 +175,7 @@ h6 {
 
 }
 
-@media(max-width:380px) {
+@media(max-width:600px) {
   #header {
     padding-block: 3px;
 
