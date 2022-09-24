@@ -37,7 +37,7 @@ a {
   width: 90vw;
   margin: auto;
   margin-block: 1rem;
-  min-height: calc(100% - 180px);
+  min-height: calc(100% - 160px);
 }
 
 .red-text {
