@@ -17,13 +17,11 @@
     </div>
     <div class="form_group">
       <button class="btn btn_primary" @click="handleLogin">Login</button>
-      <button
-        class=""
-        @click="register"
-        v-if="!store.isLoggedIn"
-      >
+      <br />
+      <br />
+      <router-link :to="{ name: 'register' }" class="">
         Or click here to register
-      </button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -49,9 +47,6 @@ function handleLogin() {
   authService.login(user).then(() =>
     route.push({ name: 'homePage' })
   )
-}
-function register() {
-  route.push('/register')
 }
 onMounted(() => {
   if (store.userId) {
