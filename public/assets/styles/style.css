@@ -15,14 +15,14 @@ body {
 }
 
 :root {
-  --main-blue: rgb(45, 156, 219);
-  --secondary-grey: rgb(122, 143, 155);
+  --main-blue: #3fb4dd;
+  --secondary-grey: #1986af;
 }
 
 body {
   margin: 0;
   font-family: 'Overpass', sans-serif;
-  background-color: #2d9cdb1f;
+  background-color: #cde9f5;
 }
 
 
