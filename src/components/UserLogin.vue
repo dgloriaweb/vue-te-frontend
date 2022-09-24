@@ -18,11 +18,11 @@
     <div class="form_group">
       <button class="btn btn_primary" @click="handleLogin">Login</button>
       <button
-        class="btn btn_primary"
+        class=""
         @click="register"
         v-if="!store.isLoggedIn"
       >
-        Register
+        Or click here to register
       </button>
     </div>
   </div>
