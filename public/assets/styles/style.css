@@ -25,6 +25,7 @@ body {
   background-color: #2d9cdb1f;
 }
 
+
 a {
   text-decoration: none;
   width: fit-content;
@@ -178,6 +179,9 @@ h6 {
   #header {
     padding-block: 3px;
 
+  }
+  body{
+    height:100vh;
   }
 }
 
