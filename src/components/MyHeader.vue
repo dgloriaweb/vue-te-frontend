@@ -3,7 +3,7 @@
 
       <div id="logo_wrapper">
         <img id="logo_img" width="75" height="75" src="/assets/images/logo.png"  />
-        <img id="logo_text" width="400" height="115" src="/assets/images/logo_text.png"  />
+        <img id="logo_text" width="400" height="115" src="/assets/images/logo_text2.png"  />
         
       </div>
       &nbsp;
