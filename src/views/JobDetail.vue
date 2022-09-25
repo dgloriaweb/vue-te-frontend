@@ -1,10 +1,15 @@
 <template>
   <div v-if="!jobStore?.job">This job doesn't exist</div>
-  <div v-if="jobStore?.job">
+  <div v-if="jobStore?.job" class="wrapper">
+    <div v-if="(store.userId = 9)">
+      <router-link
+        :to="{ name: 'editJobPreferences' }"
+        class="btn btn_secondary"
+      >
+        Edit
+      </router-link>
+    </div>
     <h1>{{ jobStore.job.job_name }}</h1>
-    <router-link :to="{ name: 'jobDetailEdit' }" class="jobDetailEdit_btn"
-      >Edit skillset (admin)</router-link
-    >
     <h2>Position Specifics</h2>
     <h3>Usual work location</h3>
     <div>
@@ -53,9 +58,11 @@
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useJobStore } from '@/store/jobstore'
+import { useStore } from '@/store/index'
 
 const jobStore = useJobStore()
 const route = useRoute()
+const store = useStore()
 
 onMounted(() => {
   jobStore.setJob(route.params.id)

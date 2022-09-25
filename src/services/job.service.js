@@ -20,7 +20,10 @@ class JobService {
       const response = await axios({
         method: 'post',
         url: url,
-        headers: authService.getApiHeaders()
+        headers: authService.getApiHeaders(),
+        params:{
+          job
+        }
       })
       return response
     } catch (error) {

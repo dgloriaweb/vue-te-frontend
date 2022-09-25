@@ -5,6 +5,7 @@ import Register from '../components/UserRegister.vue'
 import UserSkills from '../components/UserSkills.vue'
 import MatchRates from '../components/MatchRates.vue'
 import JobDetail from '../views/JobDetail.vue'
+import EditJobPreferences from '../components/EditJobPreferences.vue'
 
 const routes = [
   {
@@ -31,6 +32,12 @@ const routes = [
     path: '/jobs/:id',
     name: 'jobDetail',
     component: JobDetail,
+    params: true,
+  },
+  {
+    path: '/jobs/:id/edit',
+    name: 'editJobPreferences',
+    component: EditJobPreferences,
     params: true,
   },
   {
