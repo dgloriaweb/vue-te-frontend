@@ -4,6 +4,7 @@ import Login from '../components/UserLogin.vue'
 import Register from '../components/UserRegister.vue'
 import UserSkills from '../components/UserSkills.vue'
 import MatchRates from '../components/MatchRates.vue'
+import AddJob from '../components/AddJob.vue'
 import JobDetail from '../views/JobDetail.vue'
 import EditJobPreferences from '../components/EditJobPreferences.vue'
 
@@ -44,6 +45,11 @@ const routes = [
     path: '/matchRates',
     name: 'matchRates',
     component: MatchRates,
+  },
+  {
+    path: '/addJob',
+    name: 'addJob',
+    component: AddJob,
   },
 ]
 

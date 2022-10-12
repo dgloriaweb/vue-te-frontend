@@ -29,6 +29,11 @@
           <router-link :to="{ name: 'matchRates' }" class="btn btn_primary">
             See all
           </router-link>
+          <div v-if="store.userId == 8 || store.userId == 9">
+            <router-link :to="{ name: 'addJob' }" class="btn btn_primary">
+              Add job
+            </router-link>
+          </div>
         </div>
       </div>
       <div class="myGridColumn" v-if="jobStore.personUpdated">
@@ -181,7 +186,7 @@
         <button id="show-modal" class="btn btn_primary" @click="showModalFunc">
           Store settings
         </button>
-        <div style="line-height:0.5rem">&nbsp;</div>
+        <div style="line-height: 0.5rem">&nbsp;</div>
 
         <router-link
           :to="{ name: 'userSkills' }"
