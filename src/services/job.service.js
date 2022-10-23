@@ -45,5 +45,22 @@ class JobService {
       console.log(error)
     }
   }
+
+  createJob = async (job) => {
+    try {
+      const url = process.env.VUE_APP_API_URL + '/api/jobs/'
+      const response = await axios({
+        method: 'post',
+        url: url,
+        headers: authService.getApiHeaders(),
+        params:{
+          job
+        }
+      })
+      return response
+    } catch (error) {
+      alert('error in updatePerson: '.error)
+    }
+  }
 }
 export default new JobService()

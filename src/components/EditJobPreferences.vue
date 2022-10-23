@@ -168,7 +168,7 @@
 
 <script setup>
 import { useJobStore } from '../store/jobstore'
-import jonService from '../services/job.service'
+import jobService from '../services/job.service'
 import ModalComponent from '@/components/ModalComponent'
 import { ref } from 'vue'
 import { onMounted } from 'vue'
@@ -194,7 +194,7 @@ function confirmJobSettingChanges() {
 
 
 function storeJobPreferencesData() {
-  jonService.setJob(jobStore.job).then(
+  jobService.setJob(jobStore.job).then(
     (response) => {
       if (response.status == 223) {
         alert(response.data)

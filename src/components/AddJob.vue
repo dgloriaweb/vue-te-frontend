@@ -1,7 +1,10 @@
 <template>
   <div class="wrapper">
-    <div class="myGridContainer" >
-    <h1>Enter Name</h1>
+    <div class="myGridContainer">
+      <h1>
+        Enter new job's name
+        <input type="text" placeholder="Enter Name" v-model="job.job_name" />
+      </h1>
       <div class="myGridColumn">
         <h3>Usual work location</h3>
         <input
@@ -9,7 +12,7 @@
           class="form-check-input"
           name="workplace"
           id="workplaceChk"
-          v-model="jobStore.job.workplace"
+          v-model="job.workplace"
           @change="checkWorkplace"
         />
         <label for="workplaceChk">I want to work at the workplace</label>
@@ -19,7 +22,7 @@
           class="form-check-input"
           name="remote"
           id="remoteChk"
-          v-model="jobStore.job.remote"
+          v-model="job.remote"
           @change="checkRemote"
         />
         <label for="remoteChk">I want to work remotely</label>
@@ -31,7 +34,7 @@
           class="form-check-input"
           name="overtime"
           id="overtimeChk"
-          v-model="jobStore.job.overtime"
+          v-model="job.overtime"
           @change="checkOvertime"
         />
         <label for="overtimeChk">Want to do jobs that has overtime</label>
@@ -43,7 +46,7 @@
           class="form-check-input"
           name="workdays"
           id="workdaysChk"
-          v-model="jobStore.job.workdays"
+          v-model="job.workdays"
           @change="checkWorkdays"
         />
         <label for="workdaysChk">I want to work workdays</label>
@@ -53,7 +56,7 @@
           class="form-check-input"
           name="saturday"
           id="saturdayChk"
-          v-model="jobStore.job.saturday"
+          v-model="job.saturday"
           @change="checkSaturday"
         />
         <label for="saturdayChk">Can do Saturdays</label>
@@ -63,7 +66,7 @@
           class="form-check-input"
           name="sunday"
           id="sundayChk"
-          v-model="jobStore.job.sunday"
+          v-model="job.sunday"
           @change="checkSunday"
         />
         <label for="sundayChk">Can do Sundays</label>
@@ -73,7 +76,7 @@
           class="form-check-input"
           name="bank_holidays"
           id="bank_holidaysChk"
-          v-model="jobStore.job.bank_holidays"
+          v-model="job.bank_holidays"
           @change="checkBankholidays"
         />
         <label for="bank_holidaysChk">Can do bank holidays</label>
@@ -84,7 +87,7 @@
           class="form-check-input"
           name="sat_sun_bh_only"
           id="sat_sun_bh_onlyChk"
-          v-model="jobStore.job.sat_sun_bh_only"
+          v-model="job.sat_sun_bh_only"
           @change="checkSatsunbhonly"
         />
         <label for="sat_sun_bh_onlyChk"
@@ -99,7 +102,7 @@
           class="form-check-input"
           name="normal_hours"
           id="normal_hoursChk"
-          v-model="jobStore.job.normal_hours"
+          v-model="job.normal_hours"
           @change="checkNormalhours"
         />
         <label for="normal_hoursChk">Want to work normal hours</label>
@@ -109,7 +112,7 @@
           class="form-check-input"
           name="nightshift"
           id="nightshiftChk"
-          v-model="jobStore.job.nightshift"
+          v-model="job.nightshift"
           @change="checkNightshift"
         />
         <label for="nightshiftChk">Can do nightshift</label>
@@ -119,7 +122,7 @@
           class="form-check-input"
           name="other_shift"
           id="other_shiftChk"
-          v-model="jobStore.job.other_shift"
+          v-model="job.other_shift"
           @change="checkOthershift"
         />
         <label for="other_shiftChk">Can do other shift</label>
@@ -131,7 +134,7 @@
           class="form-check-input"
           name="nightshift_only"
           id="nightshift_onlyChk"
-          v-model="jobStore.job.nightshift_only"
+          v-model="job.nightshift_only"
           @change="checkNightshiftonly"
         />
         <label for="nightshift_onlyChk">Want to do nightshift only</label>
@@ -141,7 +144,7 @@
           class="form-check-input"
           name="other_shift_only"
           id="other_shift_onlyChk"
-          v-model="jobStore.job.other_shift_only"
+          v-model="job.other_shift_only"
           @change="checkOthershiftonly"
         />
         <label for="other_shift_onlyChk"
@@ -153,7 +156,9 @@
           Store settings
         </button>
         <div style="line-height: 0.5rem">&nbsp;</div>
-      <router-link :to="{name:'homePage'}" class="btn btn_secondary">Return to results</router-link>
+        <router-link :to="{ name: 'homePage' }" class="btn btn_secondary"
+          >Return to results</router-link
+        >
       </div>
     </div>
     <ModalComponent
@@ -168,11 +173,30 @@
 
 <script setup>
 import { useJobStore } from '../store/jobstore'
-import jonService from '../services/job.service'
+import jobService from '../services/job.service'
 import ModalComponent from '@/components/ModalComponent'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
+
+const route = useRouter()
 const jobStore = useJobStore()
+let job = reactive({
+  workplace: false,
+  remote: false,
+  workdays: false,
+  saturday: false,
+  sunday: false,
+  bank_holidays: false,
+  sat_sun_bh_only: false,
+  normal_hours: false,
+  nightshift: false,
+  nightshift_only: false,
+  other_shift: false,
+  other_shift_only: false,
+  overtime: false,
+})
+
 
 let showModal = ref(false)
 let modalHeaderText = "Confirm Changes"
@@ -191,7 +215,7 @@ function confirmJobSettingChanges() {
 
 
 function storeJob() {
-  jonService.createJob(jobStore.job).then(
+  jobService.createJob(job).then(
     (response) => {
       if (response.status == 223) {
         alert(response.data)
@@ -205,6 +229,8 @@ function storeJob() {
         // change modal and show confirm message
         // update rates
         jobStore.setJobSummaryData()
+        route.push({ name: 'homePage' })
+
       }
     })
     .catch(error => {
@@ -223,12 +249,12 @@ function storeJob() {
 function checkWorkplace(e) {
   //console.log(e.target.checked); //tells if the checkbox is selected or not
   if (e.target.checked) {// uncheck checkRemote
-    jobStore.job.remote = false
+    job.remote = false
   }
 }
 function checkRemote(e) {
   if (e.target.checked) {
-    jobStore.job.workplace = false
+    job.workplace = false
   }
 }
 
@@ -237,59 +263,59 @@ function checkRemote(e) {
 **********************************************************/
 function checkSatsunbhonly(e) {
   if (e.target.checked) {
-    jobStore.job.workdays = false
-    jobStore.job.saturday = false
-    jobStore.job.sunday = false
-    jobStore.job.bank_holidays = false
+    job.workdays = false
+    job.saturday = false
+    job.sunday = false
+    job.bank_holidays = false
   } else {
-    jobStore.job.workdays = true
+    job.workdays = true
   }
 }
 function checkWorkdays(e) {
   if (e.target.checked) {
-    jobStore.job.sat_sun_bh_only = false
+    job.sat_sun_bh_only = false
   } else {
-    if (jobStore.job.saturday == 1 && jobStore.job.sunday == 1 && jobStore.job.bank_holidays == 1) {
-      jobStore.job.saturday = false
-      jobStore.job.sunday = false
-      jobStore.job.bank_holidays = false
-      jobStore.job.sat_sun_bh_only = true
+    if (job.saturday == 1 && job.sunday == 1 && job.bank_holidays == 1) {
+      job.saturday = false
+      job.sunday = false
+      job.bank_holidays = false
+      job.sat_sun_bh_only = true
     }
   }
 }
 function checkSaturday(e) {
   if (e.target.checked) {
-    if (jobStore.job.workdays == false && jobStore.job.sunday == 1 && jobStore.job.bank_holidays == 1) {
-      jobStore.job.saturday = false
-      jobStore.job.sunday = false
-      jobStore.job.bank_holidays = false
-      jobStore.job.sat_sun_bh_only = true
+    if (job.workdays == false && job.sunday == 1 && job.bank_holidays == 1) {
+      job.saturday = false
+      job.sunday = false
+      job.bank_holidays = false
+      job.sat_sun_bh_only = true
     } else {
-      jobStore.job.sat_sun_bh_only = false
+      job.sat_sun_bh_only = false
     }
   }
 }
 function checkSunday(e) {
   if (e.target.checked) {
-    if (jobStore.job.workdays == false && jobStore.job.saturday == 1 && jobStore.job.bank_holidays == 1) {
-      jobStore.job.saturday = false
-      jobStore.job.sunday = false
-      jobStore.job.bank_holidays = false
-      jobStore.job.sat_sun_bh_only = true
+    if (job.workdays == false && job.saturday == 1 && job.bank_holidays == 1) {
+      job.saturday = false
+      job.sunday = false
+      job.bank_holidays = false
+      job.sat_sun_bh_only = true
     } else {
-      jobStore.job.sat_sun_bh_only = false
+      job.sat_sun_bh_only = false
     }
   }
 }
 function checkBankholidays(e) {
   if (e.target.checked) {// uncheck checkRemote
-    if (jobStore.job.workdays == false && jobStore.job.saturday == 1 && jobStore.job.sunday == 1) {
-      jobStore.job.saturday = false
-      jobStore.job.sunday = false
-      jobStore.job.bank_holidays = false
-      jobStore.job.sat_sun_bh_only = true
+    if (job.workdays == false && job.saturday == 1 && job.sunday == 1) {
+      job.saturday = false
+      job.sunday = false
+      job.bank_holidays = false
+      job.sat_sun_bh_only = true
     } else {
-      jobStore.job.sat_sun_bh_only = false
+      job.sat_sun_bh_only = false
     }
   }
 }
@@ -298,49 +324,49 @@ function checkBankholidays(e) {
 **********************************************************/
 function checkNormalhours(e) {
   if (e.target.checked) {
-    jobStore.job.nightshift_only = false
-    jobStore.job.other_shift_only = false
-  } else if (jobStore.job.other_shift_only == 0) {
-    jobStore.job.nightshift = true
+    job.nightshift_only = false
+    job.other_shift_only = false
+  } else if (job.other_shift_only == 0) {
+    job.nightshift = true
   }
 }
 function checkNightshiftonly(e) {
   if (e.target.checked) {
-    jobStore.job.normal_hours = false
-    jobStore.job.nightshift = true
-    jobStore.job.other_shift = false
-    jobStore.job.other_shift_only = false
+    job.normal_hours = false
+    job.nightshift = true
+    job.other_shift = false
+    job.other_shift_only = false
   }
 }
 function checkOthershift(e) {
   if (e.target.checked) {
-    jobStore.job.nightshift_only = false
-    if (jobStore.job.normal_hours == 0 && jobStore.job.nightshift == 0) {
-      jobStore.job.other_shift_only = true
+    job.nightshift_only = false
+    if (job.normal_hours == 0 && job.nightshift == 0) {
+      job.other_shift_only = true
     }
 
-  } else if (jobStore.job.nightshift == 1) {
-    jobStore.job.nightshift_only = true
+  } else if (job.nightshift == 1) {
+    job.nightshift_only = true
   }
 }
 function checkOthershiftonly(e) {
   if (e.target.checked) {
-    jobStore.job.other_shift = true
-    jobStore.job.nightshift = false
-    jobStore.job.nightshift_only = false
-    jobStore.job.normal_hours = false
+    job.other_shift = true
+    job.nightshift = false
+    job.nightshift_only = false
+    job.normal_hours = false
   }
 }
 function checkNightshift(e) {
   if (e.target.checked) {
-    jobStore.job.other_shift_only = false
-    if (jobStore.job.normal_hours == 0 && jobStore.job.other_shift == 0) {
-      jobStore.job.nightshift_only = true
+    job.other_shift_only = false
+    if (job.normal_hours == 0 && job.other_shift == 0) {
+      job.nightshift_only = true
     }
-  } else if (jobStore.job.other_shift == 1) {
-    jobStore.job.other_shift_only = true
-  } else if (jobStore.job.normal_hours == 1) {
-    jobStore.job.nightshift_only = false
+  } else if (job.other_shift == 1) {
+    job.other_shift_only = true
+  } else if (job.normal_hours == 1) {
+    job.nightshift_only = false
   }
 }
 
