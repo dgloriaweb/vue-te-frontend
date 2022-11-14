@@ -7,7 +7,12 @@ import jobService from '@/services/job.service'
 export const useJobStore = defineStore('jobs', {
   state: () => ({
     match_rates: null,
-    personUpdated: null,
+    jobUpdated: {
+      workdays: null   // u have to declare workdays, because u receive error of undefined when the page is rendered
+    },
+    personUpdated: {
+      workdays: null
+    },
     job: null,
   }),
   getters: {
