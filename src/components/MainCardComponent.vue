@@ -87,7 +87,7 @@ import { defineEmits, defineProps } from "vue";
 
 const jobStore = useJobStore()
 
-const emit = defineEmits(['checkWorkCase'])
+const emit = defineEmits(['showModalFunc'])
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   dataRoute: String
