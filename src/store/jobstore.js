@@ -7,8 +7,15 @@ import jobService from '@/services/job.service'
 export const useJobStore = defineStore('jobs', {
   state: () => ({
     match_rates: null,
-    personUpdated: null,
-    job: null,
+    personUpdated: {
+      workdays: undefined
+    },
+    job: {
+      workdays: undefined
+    },
+    editJob: {
+      workdays: undefined
+    },
   }),
   getters: {
     getMatchRates(state) {

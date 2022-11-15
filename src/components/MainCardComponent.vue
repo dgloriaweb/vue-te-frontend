@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-card-comp">
     <div class="myGridColumn" v-if="storeData">
       <h3>Usual work location</h3>
       <div v-for="{ name, label, id, caseValue } in workCases" :key="id">
@@ -94,3 +94,190 @@ const props = defineProps({
   dataRoute: String
 })
 let storeData = jobStore[props.dataRoute]
+
+const workCases = [
+  {
+    label: 'Usual work location',
+    name: 'workplace',
+    id: 'workplaceChk',
+    caseValue: 'remote'
+  },
+  {
+    label: 'I want to work at the workplace',
+    name: 'remote',
+    id: 'remoteChk',
+    caseValue: 'workplace'
+  }
+]
+const workingDaysCases = [
+  {
+    name: 'workdays',
+    id: 'workdaysChk',
+    label: 'I want to work workdays',
+    key1: 'saturday',
+    key2: 'sunday',
+    key3: 'bank_holidays'
+  },
+  {
+    name: 'saturday',
+    id: 'saturdayChk',
+    label: 'Can do Saturdays',
+    key1: 'workdays',
+    key2: 'sunday',
+    key3: 'bank_holidays'
+  },
+  {
+    name: 'sunday',
+    id: 'sundayChk',
+    label: 'Can do Sundays',
+    key1: 'workdays',
+    key2: 'saturday',
+    key3: 'bank_holidays'
+  },
+]
+const workingHoursList = [
+  {
+    name: 'normal_hours',
+    id: 'normal_hoursChk',
+    label: 'Want to work normal hours',
+    func: 'checkNormalhours'
+  },
+  {
+    name: 'nightshift',
+    id: 'nightshiftChk',
+    label: 'Can do nightshift',
+    func: 'checkNightshift'
+  },
+  {
+    name: 'other_shift',
+    id: 'other_shiftChk',
+    label: 'Can do other shift',
+    func: 'checkOthershift'
+  }
+]
+const specialWorkingHoursList = [
+  {
+    name: 'nightshift_only',
+    id: 'nightshift_onlyChk',
+    label: 'Want to do nightshift only',
+    func: 'checkNightshiftonly'
+  },
+  {
+    name: 'other_shift_only',
+    id: 'other_shift_onlyChk',
+    label: 'Want to do other shift only (eg. late afternoons)',
+    func: 'checkOthershiftonly'
+  }
+]
+
+function showModalFunc () {
+  emit('showModalFunc', )
+}
+
+/* *******************************************************
+// investigate cases of checkboxes workplace and remote
+**********************************************************/
+function checkWorkCase (e, caseValue) {
+  if (e.target.checked) {
+    storeData[caseValue] = false
+  }
+}
+function checkOvertime () {}
+
+/* *******************************************************
+// investigate cases of checkboxes days
+**********************************************************/
+function checkCaseOfDays (e, key1, key2, key3) {
+  if (e.target.checked) {
+    if (storeData[key1] === false && storeData[key2] === 1 && storeData[key3] === 1) {
+      const keys = ['saturday', 'sunday', 'bank_holidays', 'sat_sun_bh_only']
+      keys.forEach(key => storeData[key] = key === 'sat_sun_bh_only')
+    } else {
+      storeData.sat_sun_bh_only = false
+    }
+  }
+}
+function checkSatsunbhonly(e) {
+  if (e.target.checked) {
+    const keys = ['workdays', 'saturday', 'sunday', 'bank_holidays']
+    keys.forEach(key => storeData[key] = false)
+  } else {
+    storeData.workdays = true
+  }
+}
+function checkBankholidays(e) {
+  if (e.target.checked) {
+    if (storeData.workdays === false && storeData.saturday === 1 && storeData.sunday === 1) {
+      const keys = ['saturday', 'sunday', 'bank_holidays', 'sat_sun_bh_only']
+      keys.forEach(key => storeData[key] = key === 'sat_sun_bh_only')
+    } else {
+      storeData.sat_sun_bh_only = false
+    }
+  }
+}
+
+/* *******************************************************
+// investigate cases of checkboxes hours
+**********************************************************/
+function workingHoursFunction (e, func) {
+  switch (func) {
+    case 'checkNormalhours':
+      if (e.target.checked) {
+        const keys = ['nightshift_only', 'other_shift_only']
+        keys.forEach(key => storeData[key] = false)
+      } else if (storeData.other_shift_only === 0) {
+        storeData.nightshift = true
+      }
+      break;
+    case 'checkNightshift':
+      if (e.target.checked) {
+        storeData.other_shift_only = false
+        if (storeData.normal_hours === 0 && storeData.other_shift === 0) {
+          storeData.nightshift_only = true
+        }
+      } else if (storeData.other_shift === 1) {
+        storeData.other_shift_only = true
+      } else if (storeData.normal_hours === 1) {
+        storeData.nightshift_only = false
+      }
+      break;
+    case 'checkOthershift' :
+      if (e.target.checked) {
+        storeData.nightshift_only = false
+        if (storeData.normal_hours === 0 && storeData.nightshift === 0) {
+          storeData.other_shift_only = true
+        }
+
+      } else if (storeData.nightshift === 1) {
+        storeData.nightshift_only = true
+      }
+      break;
+
+  }
+}
+function specialWorkingHoursFunction (e, func) {
+  switch(func) {
+    case 'checkNightshiftonly':
+      if (e.target.checked) {
+        const keys = ['normal_hours', 'nightshift', 'other_shift', 'other_shift_only']
+        keys.forEach(key => storeData[key] = key === 'nightshift')
+      }
+      break;
+    case 'checkOthershiftonly':
+      if (e.target.checked) {
+        const keys = ['other_shift', 'nightshift', 'nightshift_only', 'normal_hours']
+        keys.forEach(key => storeData[key] = key === 'other_shift')
+      }
+      break;
+  }
+}
+
+
+</script>
+
+<style>
+.main-card-comp {
+  width: 1000px;
+  display: flex;
+}
+</style>
