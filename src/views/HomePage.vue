@@ -1,16 +1,16 @@
 <template>
   <div class="wrapper">
-    <div v-if="!store.isLoggedIn">
-      <h1>Find your true calling!</h1>
-      <h2>
-        TalentExploit is a tool to find your career path by selecting your
-        skills, working condition preferences, certifications, habits, hobbies,
-        wishes, hopes and dreams.
-      </h2>
-      <p>Please login to continue</p>
-    </div>
-    <div class="myGridContainer" v-if="jobStore.personUpdated">
-      <div class="myGridColumn" v-if="jobStore.match_rates">
+<!--    <div v-if="!store.isLoggedIn">-->
+<!--      <h1>Find your true calling!</h1>-->
+<!--      <h2>-->
+<!--        TalentExploit is a tool to find your career path by selecting your-->
+<!--        skills, working condition preferences, certifications, habits, hobbies,-->
+<!--        wishes, hopes and dreams.-->
+<!--      </h2>-->
+<!--      <p>Please login to continue</p>-->
+<!--    </div>-->
+    <div class="myGridContainer">
+      <div class="myGridColumn">
         <h2>Results</h2>
         <div id="ratesContainer">
           <div v-for="job in jobStore.match_rates" :key="job.id" id="myGridRow">
@@ -35,13 +35,10 @@
             </router-link>
         </div>
       </div>
-
-      <MainCardComponent
-        style="display: contents"
-        @show-modal-func="showModalFunc"
-        data-route="personUpdated"
-      />
-
+        <MainCardComponent
+            @show-modal-func="showModalFunc"
+            data-route="personUpdated"
+        />
         <router-link
           :to="{ name: 'userSkills' }"
           class="btn btn_primary"
@@ -49,24 +46,28 @@
         >
           Go to my skills
       </router-link>
+
     </div>
-    <ModalComponent
+      <ModalComponent
       :show="showModal"
       :modalBody="modalBodyText"
       :modalHeader="modalHeaderText"
       @close="hideModal"
       @submitModal="confirmPersonSettingChanges()"
     />
+    </div>
+    <EditJobPreferences/>
   </div>
 </template>
 
 <script setup>
 import { useStore } from '@/store/index'
 import { useJobStore } from '../store/jobstore'
-import personService from '../services/person.service'
+// import personService from '../services/person.service'
 import ModalComponent from '@/components/ModalComponent'
 import { ref } from 'vue'
 import MainCardComponent from "@/components/MainCardComponent";
+import EditJobPreferences from "@/components/EditJobPreferences";
 
 const jobStore = useJobStore()
 const store = useStore()
@@ -89,29 +90,32 @@ function confirmPersonSettingChanges() {
 
 
 function storePersonData() {
-  personService.updatePerson(jobStore.personUpdated).then(
-    (response) => {
-      if (response.status == 223) {
-        alert(response.data)
-      }
-      else if (response.status != 200) {
-        alert('unhandled error');
-      }
-      else {
-        // alert('settings updated')
-        hideModal()
-        // change modal and show confirm message
-        // update rates
-        jobStore.setJobSummaryData()
-      }
-    })
-    .catch(error => {
-      if (error.response.data.errors) {
-        alert(error.response.data.errors);
-      } else {
-        alert('unhandled error');
-      }
-    })
+  console.log('personUpdated')
+  console.log(jobStore.personUpdated)
+
+  // personService.updatePerson(jobStore.personUpdated).then(
+  //   (response) => {
+  //     if (response.status == 223) {
+  //       alert(response.data)
+  //     }
+  //     else if (response.status != 200) {
+  //       alert('unhandled error');
+  //     }
+  //     else {
+  //       // alert('settings updated')
+  //       hideModal()
+  //       // change modal and show confirm message
+  //       // update rates
+  //       jobStore.setJobSummaryData()
+  //     }
+  //   })
+  //   .catch(error => {
+  //     if (error.response.data.errors) {
+  //       alert(error.response.data.errors);
+  //     } else {
+  //       alert('unhandled error');
+  //     }
+  //   })
 }
 
 

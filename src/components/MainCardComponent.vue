@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-card-comp">
     <div class="myGridColumn" v-if="storeData">
       <h3>Usual work location</h3>
       <div
@@ -274,3 +274,13 @@ function specialWorkingHoursFunction (e, func) {
 
 
 </script>
+
+
+<style>
+.main-card-comp {
+  width: 1000px;
+  display: flex;
+}
+</style>
+
+
