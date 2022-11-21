@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="myGridContainer" v-if="jobStore.job">
-    <h1>{{ jobStore.job.job_name }}</h1>
+      <h1>{{ jobStore.job.job_name }}</h1>
       <div class="myGridColumn" v-if="jobStore.job">
         <h3>Usual work location</h3>
         <input
@@ -153,8 +153,17 @@
           Store settings
         </button>
         <div style="line-height: 0.5rem">&nbsp;</div>
-      <router-link :to="{name:'homePage'}" class="btn btn_secondary">Return to results</router-link>
+        <router-link :to="{ name: 'homePage' }" class="btn btn_secondary"
+          >Return to results</router-link
+        >
       </div>
+    </div>
+    Blabla
+    <div class="">
+      <MainCardComp
+        @show-modal-func="showModalFunc"
+        data-route="job"
+      />
     </div>
     <ModalComponent
       :show="showModal"
@@ -167,12 +176,13 @@
 </template>
 
 <script setup>
-import { useJobStore } from '../store/jobstore'
-import jobService from '../services/job.service'
+import { useJobStore } from '@/store/jobstore'
+import jobService from '@/services/job.service'
 import ModalComponent from '@/components/ModalComponent'
 import { ref } from 'vue'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { MainCardComp } from '@/components/MainCardComp'
 
 const jobStore = useJobStore()
 const route = useRoute()
