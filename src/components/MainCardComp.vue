@@ -1,5 +1,4 @@
 <template>
-{{storeData}}
   <div class="main-card-comp">
     <div class="myGridColumn" v-if="storeData">
       <h3>Usual work location</h3>

@@ -159,10 +159,10 @@
       </div>
     </div>
     Blabla
-    <div class="">
+    <div class="thi is ">
       <MainCardComp
         @show-modal-func="showModalFunc"
-        data-route="job"
+        data-route="personUpdated"
       />
     </div>
     <ModalComponent
