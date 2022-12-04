@@ -1,7 +1,6 @@
 <template>
-  <div>
-Ooops, something went wrong. Please check back later.
-  </div>
+  <div style="height:100%">
+Hi, the site is down for maintenance. Thank you for your interest. Dgloria  </div>
 </template>
 
 <script setup>
