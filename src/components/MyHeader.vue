@@ -1,22 +1,28 @@
 <template>
   <div id="header">
-
-      <div id="logo_wrapper">
-        <img id="logo_img" width="75" height="75" src="/assets/images/logo.png"  />
-        <img id="logo_text" width="400" height="115" src="/assets/images/logo_text2.png"  />
-        
-      </div>
-      &nbsp;
-      <div @click="logout" v-if="store.isLoggedIn" class="btn btn-secondary">
-        <i class="fa-solid fa-user"></i> Logout
-      </div>
-      <div @click="login" v-if="!store.isLoggedIn" class="btn btn-secondary">
-        <i class="fa-solid fa-user"></i> Login
-      </div>
-      <!-- <div @click="register" v-if="!store.isLoggedIn">
+    <div id="logo_wrapper">
+      <img id="logo_img" width="75" height="75" src="/assets/images/logo.png" />
+      <img
+        id="logo_text"
+        width="400"
+        height="115"
+        src="/assets/images/logo_text2.png"
+      />
+    </div>
+    &nbsp;
+    <a href="https://talentexploit-wiki.netlify.app/" class="btn btn_secondary">
+      Docs
+    </a>
+    &nbsp;
+    <div @click="logout" v-if="store.isLoggedIn" class="btn btn_secondary">
+      <i class="fa-solid fa-user"></i> Logout
+    </div>
+    <div @click="login" v-if="!store.isLoggedIn" class="btn btn_secondary">
+      <i class="fa-solid fa-user"></i> Login
+    </div>
+    <!-- <div @click="register" v-if="!store.isLoggedIn">
         <i class="fa-solid fa-user"></i> Register
       </div> -->
-
   </div>
 </template>
 
