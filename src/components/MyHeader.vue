@@ -9,20 +9,24 @@
         src="/assets/images/logo_text2.png"
       />
     </div>
-    &nbsp;
-    <a href="https://talentexploit-wiki.netlify.app/" class="btn btn_secondary">
-      Docs
-    </a>
-    &nbsp;
-    <div @click="logout" v-if="store.isLoggedIn" class="btn btn_secondary">
-      <i class="fa-solid fa-user"></i> Logout
+    <div class="">
+      <a
+        href="https://talentexploit-wiki.netlify.app/"
+        class="btn btn_secondary"
+      >
+        Docs
+      </a>
+      &nbsp;
+      <div @click="logout" v-if="store.isLoggedIn" class="btn btn_secondary">
+        <i class="fa-solid fa-user"></i> Logout
+      </div>
+      <div @click="login" v-if="!store.isLoggedIn" class="btn btn_secondary">
+        <i class="fa-solid fa-user"></i> Login
+      </div>
+      <!-- <div @click="register" v-if="!store.isLoggedIn">
+          <i class="fa-solid fa-user"></i> Register
+        </div> -->
     </div>
-    <div @click="login" v-if="!store.isLoggedIn" class="btn btn_secondary">
-      <i class="fa-solid fa-user"></i> Login
-    </div>
-    <!-- <div @click="register" v-if="!store.isLoggedIn">
-        <i class="fa-solid fa-user"></i> Register
-      </div> -->
   </div>
 </template>
 
