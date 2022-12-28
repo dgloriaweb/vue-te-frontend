@@ -18,7 +18,7 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Overpass', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: #cde9f5;
 }
 
@@ -26,7 +26,7 @@ body {
 a {
   text-decoration: none;
   width: fit-content;
-  font-family: 'Overpass', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 
 }
 
@@ -103,7 +103,7 @@ a {
   box-sizing: border-box;
   border-width: 2px;
   border-style: outset;
-  font-family: 'Overpass', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
 
