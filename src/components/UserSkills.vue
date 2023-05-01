@@ -92,15 +92,17 @@ function removeSkill(userSkill) {
   // filter out object with this skill id
   skillStore.userSkills = Object.values(skillStore.userSkills).filter((item) => item["id"] != userSkill["id"])
 
+  // this breaks the code, need to test how the core_skill can be eliminated
   // find the corresponding core_skill in the skills
   // add these data as array item to the skills 
-  var object = {
-    "id": userSkill["id"],
-    "skill": userSkill["skill"]
-  }
-
+  // var object = {
+  //   "id": userSkill["id"],
+  //   "skill": userSkill["skill"]
+  // }
   // 14 has no core skill! Need to fix those which don't have a core skill
-  skillStore.skills[userSkill["core_skill"]].push(object)
+  // skillStore.skills[userSkill["core_skill"]].push(object)
+
+  
 
 }
 /* *************************************

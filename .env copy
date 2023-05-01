@@ -1,8 +1,0 @@
-NODE_ENV=development
-VUE_APP_BASE_URL=http://localhost:8080
-
-VUE_APP_API_URL=http://127.0.0.1:8000
-VUE_APP_API_LIVE_URL=https://talentexploitapi.co.uk 
-
-VUE_APP_CLIENT_ID=9
-VUE_APP_CLIENT_SECRET=AO9ITvvSgYm8O1OH7CJAd6NDfi7v7z58Dzip2R38
