@@ -133,11 +133,6 @@ this part is tricky, handle with care!!!
   padding: 1vw;
   min-width: 200px;
 }
-#myGridRow {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  padding: 10px;
-}
 
 .grid-cell-1 {
   width: max-content;

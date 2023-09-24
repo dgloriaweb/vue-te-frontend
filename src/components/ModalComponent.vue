@@ -15,11 +15,11 @@
               <slot name="footer">
                 {{props.modalFooter}}
                 <br>
-                <button class="modal-default-button" @click="$emit('submitModal')">
+                <button class="btn btn_primary modal-default-button" @click="$emit('submitModal')">
                   OK
                 </button>
                 &nbsp;
-                <button class="modal-default-button"  @click="$emit('close')">
+                <button class="btn btn_primary modal-default-button"  @click="$emit('close')">
                   Cancel
                 </button>
                 <br>
@@ -74,7 +74,7 @@ const props = defineProps({
   width: 300px;
   margin: 0px auto;
   padding: 20px 30px;
-  background-color: #fff;
+  background-color: var(--main-light-blue);
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;

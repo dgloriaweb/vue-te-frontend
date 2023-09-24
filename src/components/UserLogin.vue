@@ -8,20 +8,17 @@
     <div class="form_group">
       <label for="password">Password</label>
       <br />
-      <input
-        name="password"
-        type="password"
-        class="form_control"
-        v-model="password"
-      />
+      <input name="password" type="password" class="form_control" v-model="password" />
     </div>
     <div class="form_group">
       <button class="btn btn_primary" @click="handleLogin">Login</button>
       <br />
       <br />
-      <router-link :to="{ name: 'register' }" class="">
-        Or click here to register
-      </router-link>
+      <strong>
+        <router-link :to="{ name: 'register' }" class="">
+          Or click here to register
+        </router-link>
+      </strong>
     </div>
   </div>
 </template>
@@ -55,5 +52,4 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

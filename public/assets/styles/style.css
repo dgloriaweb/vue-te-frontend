@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
 
 html,
 body {
-  font-family: "Open Sans";
+  font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
   height: 100%
 }
@@ -14,25 +14,25 @@ body {
 :root {
   --main-blue: #3fb4dd;
   --secondary-grey: #1986af;
+  --main-light-blue: #cde9f5;
 }
 
 body {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  background-color: #cde9f5;
+  background-color: var(--main-light-blue);
 }
 
 
 a {
   text-decoration: none;
   width: fit-content;
-  font-family: 'Open Sans', sans-serif;
 
 }
 
 .wrapper {
-  max-width: 1600px;
-  width: 90vw;
+  /* max-width: 1600px;
+  width: 90vw; */
+  padding-inline: 10%;
   margin: auto;
   margin-block: 1rem;
   min-height: calc(100% - 160px);
@@ -55,7 +55,21 @@ a {
   color: green;
   background-color: rgb(205, 255, 205);
 }
+#myGridContainer {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 35px;
+}
 
+@media (min-width: 600px) {
+  .myGridContainer {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr;
+    gap: 35px;
+  }
+}
 #myGridContainer {
   width: fit-content;
   display: flex;
@@ -69,7 +83,7 @@ a {
 #myGridRow {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  padding: 10px;
+  padding-block: 10px;
 }
 
 .grid-cell-1 {
@@ -85,7 +99,6 @@ a {
 }
 
 .btn {
-  border-radius: 7px;
   padding: 6px 12px;
   appearance: auto;
   writing-mode: horizontal-tb;
@@ -101,10 +114,11 @@ a {
   align-items: flex-start;
   cursor: default;
   box-sizing: border-box;
+  border-radius: 4px;
   border-width: 2px;
   border-style: outset;
-  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .btn:hover {
@@ -112,13 +126,13 @@ a {
 }
 
 .btn_primary {
-  color: white;
+  color: var(--main-light-blue);
   background-color: var(--main-blue);
   border-color: var(--main-blue);
 }
 
 .btn_secondary {
-  color: white;
+  color: var(--main-light-blue);
   background-color: var(--secondary-grey);
   border-color: var(--secondary-grey);
 }
@@ -159,8 +173,9 @@ h6 {
 
 #header {
   padding: 10px;
+  padding-inline: 10%;
   background-color: var(--main-blue);
-  color: white;
+  color: var(--main-light-blue);
   height: 112px;
   display: flex;
   align-items: center;
@@ -177,7 +192,7 @@ h6 {
 #footer {
   padding: 10px;
   background-color: var(--main-blue);
-  color: white;
+  color: var(--main-light-blue);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -187,19 +202,23 @@ h6 {
   box-shadow: 0 2px 40px 0 hsl(0deg 0% 6% / 5%);
   height: 21px;
 }
+
 @media(max-width:600px) {
   #header {
     padding-block: 3px;
 
   }
-  body{
-    height:100vh;
+
+  body {
+    height: 100vh;
   }
-  #footer{
+
+  #footer {
     position: relative;
-    width:95vw;
+    width: 95vw;
   }
 }
+
 #logo_wrapper {
   display: flex;
   align-items: center;
@@ -222,7 +241,7 @@ h6 {
   font-weight: 400;
   line-height: 1.5;
   color: #888;
-  background-color: #fff;
+  background-color: var(--main-light-blue);
   background-clip: padding-box;
   border: 1px solid #ced4da;
   -webkit-appearance: none;
@@ -241,7 +260,7 @@ h6 {
   width: 1em;
   height: 1em;
   vertical-align: top;
-  background-color: #fff;
+  background-color: var(--main-light-blue);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
