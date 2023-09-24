@@ -5,21 +5,21 @@
         <div class="modal-wrapper">
           <div class="modal-container">
             <div class="modal-header">
-              <slot name="header">{{props.modalHeader}}</slot>
+              <slot name="header">{{ props.modalHeader }}</slot>
             </div>
             <div class="modal-body">
-              <slot name="body">{{props.modalBody}}</slot>
+              <slot name="body">{{ props.modalBody }}</slot>
             </div>
 
             <div class="modal-footer">
               <slot name="footer">
-                {{props.modalFooter}}
+                {{ props.modalFooter }}
                 <br>
                 <button class="btn btn_primary modal-default-button" @click="$emit('submitModal')">
                   OK
                 </button>
                 &nbsp;
-                <button class="btn btn_primary modal-default-button"  @click="$emit('close')">
+                <button class="btn btn_primary modal-default-button" @click="$emit('close')">
                   Cancel
                 </button>
                 <br>
@@ -33,19 +33,19 @@
 </template>
 
 <script setup>
-import {  defineProps } from 'vue'
+import { defineProps } from 'vue'
 
 const props = defineProps({
   show: {
     type: Boolean
   },
-  modalBody:{
+  modalBody: {
     type: String
   },
-  modalHeader:{
+  modalHeader: {
     type: String
   },
-  modalFooter:{
+  modalFooter: {
     type: String
   }
 })
@@ -87,6 +87,12 @@ const props = defineProps({
 
 .modal-body {
   margin: 20px 0;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: right;
+  gap: 0.1rem;
 }
 
 .modal-default-button {
