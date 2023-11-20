@@ -79,6 +79,11 @@ function routeHome() {
 
   // Convert the set back to a comma-separated string
   const mySkillsList = Array.from(uniqueSkillIds).join(',');
+  // don't send api requests if the list is empty
+  if (!mySkillsList) {
+    alert("Please select a skill from the list")
+    return false
+  }
   personService.updateUserSkills(store.person, mySkillsList)
   store.initialiseComponents()
 
@@ -103,11 +108,16 @@ function addSkill(key, skill) {
 
 }
 function removeSkill(userSkill) {
-  console.log(userSkill["id"])
+  console.log(userSkill)
+  var object = {
+    "id": userSkill["id"],
+    "skill": userSkill["skill"],
+    "core_skill": userSkill['core_skill']
+  }
   // filter out object with this skill id
   skillStore.userSkills = Object.values(skillStore.userSkills).filter((item) => item["id"] != userSkill["id"])
 
-  // this breaks the code, need to test how the core_skill can be eliminated
+  // TODO: this breaks the code, need to test how the core_skill can be eliminated
   // find the corresponding core_skill in the skills
   // add these data as array item to the skills 
   // var object = {
@@ -117,7 +127,8 @@ function removeSkill(userSkill) {
   // 14 has no core skill! Need to fix those which don't have a core skill
   // skillStore.skills[userSkill["core_skill"]].push(object)
 
-
+  // add back this skill to the list on the left side
+  skillStore.skills[userSkill['core_skill']].push(object);
 
 }
 /* *************************************
