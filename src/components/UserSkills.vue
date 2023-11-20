@@ -10,12 +10,7 @@
           <div>
             <b>{{ key }}</b>
           </div>
-          <div
-            v-for="skill in value"
-            :key="skill.id"
-            id="skillLoop"
-            style="display: inline-grid"
-          >
+          <div v-for="skill in value" :key="skill.id" id="skillLoop" style="display: inline-grid">
             <div class="myBtn" @click="addSkill(key, skill)">
               {{ skill.skill }} <i class="fa fa-plus-circle"></i>
             </div>
@@ -26,11 +21,7 @@
     <div id="right-side">
       <h1>Your Skills</h1>
       <div id="skillWrapper">
-        <div
-          v-for="userSkill in skillStore.userSkills"
-          :key="userSkill.prop_link_id"
-          style="display: inline-grid"
-        >
+        <div v-for="userSkill in skillStore.userSkills" :key="userSkill.prop_link_id" style="display: inline-grid">
           <div>
             <div class="myBtn" @click="removeSkill(userSkill)">
               {{ userSkill.skill }} <i class="fa fa-minus-circle"></i>
@@ -56,14 +47,38 @@ const store = useStore()
 function routeHome() {
   // save data to backend
   // get the skill id's that are still available
-  var mySkills = skillStore.userSkills.values();
-  var mySkillsList = ""
+  // var mySkills = skillStore.userSkills.values();
+  // console.log(typeof mySkills);
+  // var mySkillsList = ""
+
+  // for (const value of mySkills) {
+  //   if (mySkillsList != "") {
+  //     mySkillsList += ","
+  //   }
+  //   // make an array of the list 
+  //   const idArray = mySkillsList.split(',').map(id => id.trim());
+  //   // if the list already has the id, then don't add it
+  //   const skillIdExists = idArray.includes(value["id"].toString());
+  //   if (!skillIdExists) {
+  //     mySkillsList += (value["id"]);
+  //   }
+  // }
+
+  // v2
+  // Save data to backend
+  // Get the skill IDs that are still available
+  const mySkills = Array.from(skillStore.userSkills.values());
+
+  // Create a set to store unique skill IDs
+  const uniqueSkillIds = new Set();
+
   for (const value of mySkills) {
-    if (mySkillsList != "") {
-      mySkillsList += ","
-    }
-    mySkillsList += (value["id"]);
+    // Add the ID to the set
+    uniqueSkillIds.add(value["id"].toString());
   }
+
+  // Convert the set back to a comma-separated string
+  const mySkillsList = Array.from(uniqueSkillIds).join(',');
   personService.updateUserSkills(store.person, mySkillsList)
   store.initialiseComponents()
 
@@ -102,7 +117,7 @@ function removeSkill(userSkill) {
   // 14 has no core skill! Need to fix those which don't have a core skill
   // skillStore.skills[userSkill["core_skill"]].push(object)
 
-  
+
 
 }
 /* *************************************
@@ -121,6 +136,7 @@ this part is tricky, handle with care!!!
   gap: 5px;
   border: 1px solid gray;
 }
+
 @media (min-width: 600px) {
   #myGridContainer {
     width: fit-content;
@@ -129,6 +145,7 @@ this part is tricky, handle with care!!!
     gap: 5px;
   }
 }
+
 #myGridColumn {
   padding: 1vw;
   min-width: 200px;
@@ -137,12 +154,15 @@ this part is tricky, handle with care!!!
 .grid-cell-1 {
   width: max-content;
 }
+
 .grid-cell-2 {
   text-align: right;
 }
+
 .grid-cell-2:after {
   content: "%";
 }
+
 .myBtn {
   padding: 5px 10px;
   border: 1px solid gray;
@@ -150,6 +170,7 @@ this part is tricky, handle with care!!!
   border-radius: 12px;
   width: fit-content;
 }
+
 #container {
   display: grid;
   grid-template-columns: 1fr 1fr;
