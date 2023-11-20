@@ -59,8 +59,10 @@ class AuthService {
         if (response.data.token) {
           alert('registration successful')
           var userCredentials = JSON.stringify(response.data)
-          setTimeout(store.setUserInLocalStore(userCredentials),1000)
+          store.setUserInLocalStore(userCredentials)
         }
+        setTimeout(store.initialiseComponents(),1000)
+
         return response
       })
       .catch((error) => {

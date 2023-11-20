@@ -57,7 +57,7 @@ export const useJobStore = defineStore('jobs', {
         .then((response) => {
           this.job = response.data
           Object.entries(this.job).forEach((entry) => {
-            if (entry[0] == 'job_name' || entry[0] == 'id') {
+            if (entry[0] == 'job_name' || entry[0] == 'id' || entry[0] == 'similar_jobitems') {
               return
             } else {
               this.job[entry[0]] = entry[1] == 1 ? true : false

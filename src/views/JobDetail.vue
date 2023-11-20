@@ -1,7 +1,7 @@
 <template>
   <div v-if="!jobStore?.job">This job doesn't exist</div>
   <div v-if="jobStore?.job" class="wrapper">
-    <div v-if="(store.userId == 8 || store.userId == 9 )">
+    <div v-if="store.userId == 8 || store.userId == 9">
       <router-link
         :to="{ name: 'editJobPreferences' }"
         class="btn btn_secondary"
@@ -46,7 +46,16 @@
     <div>Must do overtime: {{ jobStore.job.overtime ? "yes" : "no" }}</div>
     <div>Keywords: {{ jobStore.job.keywords }}</div>
     <div>
-      List of similar jobs: {{ jobStore.job.similar_jobs ? "yes" : "no" }}
+      List of similar jobs:
+      <div
+        v-for="similarJob in jobStore.job.similar_jobitems"
+        :key="similarJob.id"
+      >
+        &nbsp;
+        <small>
+          {{ similarJob }}
+        </small>
+      </div>
     </div>
     <!-- <h1>
       Drivers license: {{ jobStore.job.job_drivers_licenses[0].driver.drivers_license }}

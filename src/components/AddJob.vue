@@ -374,28 +374,10 @@ function checkNightshift(e) {
 </script>
 
 <style scoped>
-#myGridContainer {
-  width: fit-content;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 35px;
-}
-@media (min-width: 600px) {
-  .myGridContainer {
-    width: fit-content;
-    display: grid;
-    grid-template-columns: 2fr 2fr 2fr 2fr;
-    gap: 35px;
-  }
-}
+
 .myGridColumn {
   padding: 1vw;
   min-width: 200px;
-}
-#myGridRow {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  padding: 10px;
 }
 
 .grid-cell-1 {

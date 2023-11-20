@@ -1,9 +1,9 @@
 <template>
   <div id="container" class="wrapper">
     <div id="left-side">
-      <button @click="routeHome" class="btn btn_primary">
+      <div @click="routeHome" class="btn btn_primary">
         Save and return home
-      </button>
+      </div>
       <h1>All Skills</h1>
       <div id="skillWrapper">
         <div v-for="(value, key) in skillStore.skills" :key="key">
@@ -92,15 +92,17 @@ function removeSkill(userSkill) {
   // filter out object with this skill id
   skillStore.userSkills = Object.values(skillStore.userSkills).filter((item) => item["id"] != userSkill["id"])
 
+  // this breaks the code, need to test how the core_skill can be eliminated
   // find the corresponding core_skill in the skills
   // add these data as array item to the skills 
-  var object = {
-    "id": userSkill["id"],
-    "skill": userSkill["skill"]
-  }
-
+  // var object = {
+  //   "id": userSkill["id"],
+  //   "skill": userSkill["skill"]
+  // }
   // 14 has no core skill! Need to fix those which don't have a core skill
-  skillStore.skills[userSkill["core_skill"]].push(object)
+  // skillStore.skills[userSkill["core_skill"]].push(object)
+
+  
 
 }
 /* *************************************
@@ -130,11 +132,6 @@ this part is tricky, handle with care!!!
 #myGridColumn {
   padding: 1vw;
   min-width: 200px;
-}
-#myGridRow {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  padding: 10px;
 }
 
 .grid-cell-1 {
