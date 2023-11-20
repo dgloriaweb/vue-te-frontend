@@ -1,9 +1,9 @@
 <template>
   <div id="container" class="wrapper">
     <div id="left-side">
-      <button @click="routeHome" class="btn btn_primary">
+      <div @click="routeHome" class="btn btn_primary">
         Save and return home
-      </button>
+      </div>
       <h1>All Skills</h1>
       <div id="skillWrapper">
         <div v-for="(value, key) in skillStore.skills" :key="key">

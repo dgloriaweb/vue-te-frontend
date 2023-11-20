@@ -37,7 +37,8 @@ export const useStore = defineStore('main', {
 
         //skills
         const skillStore = useSkillStore()
-        //set user skills
+        //unset then set user skills
+        skillStore.unsetUserSkills()
         skillStore.setUserSkills()
         //set all skills
         skillStore.setSkills()
