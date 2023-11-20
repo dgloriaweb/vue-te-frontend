@@ -79,6 +79,7 @@ function routeHome() {
 
   // Convert the set back to a comma-separated string
   const mySkillsList = Array.from(uniqueSkillIds).join(',');
+  console.log(mySkillsList);
   // don't send api requests if the list is empty
   if (!mySkillsList) {
     alert("Please select a skill from the list")
