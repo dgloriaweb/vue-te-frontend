@@ -17,5 +17,16 @@ class SkillService {
       console.log(error)
     }
   }
+  getSkillDetails = async (skill_id) => {
+    try {
+      const url = process.env.VUE_APP_API_URL + '/api/skills/' + skill_id
+      const response = await axios.get(url, {
+        headers: authService.getApiHeaders(),
+      })
+      return response
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 export default new SkillService()

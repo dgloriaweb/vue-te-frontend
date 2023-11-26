@@ -2,18 +2,10 @@
   <div id="header">
     <div id="logo_wrapper">
       <img id="logo_img" width="75" height="75" src="/assets/images/logo.png" />
-      <img
-        id="logo_text"
-        width="400"
-        height="115"
-        src="/assets/images/logo_text2.png"
-      />
+      <img id="logo_text" width="400" height="115" src="/assets/images/logo_text2.png" />
     </div>
     <div class="">
-      <a
-        href="https://talentexploit-wiki.netlify.app/"
-        class="btn btn_secondary"
-      >
+      <a href="https://talentexploit-wiki.netlify.app/" class="btn btn_secondary">
         Docs
       </a>
       &nbsp;
@@ -26,6 +18,18 @@
       <!-- <div @click="register" v-if="!store.isLoggedIn">
           <i class="fa-solid fa-user"></i> Register
         </div> -->
+    </div>
+  </div>
+  <div class="wrapper" style="display:flex;min-height:auto">
+    <div v-if="store.userId == 8 || store.userId == 9">
+      <router-link :to="{ name: 'addJob' }" class="btn btn_secondary">
+        Add job
+      </router-link>
+    </div>
+    <div v-if="store.userId == 8 || store.userId == 9">
+      <router-link :to="{ name: 'skills' }" class="btn btn_secondary">
+        Skills List
+      </router-link>
     </div>
   </div>
 </template>
@@ -59,5 +63,4 @@ onMounted(() => {
 
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

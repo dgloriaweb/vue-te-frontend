@@ -8,7 +8,8 @@ import { defineStore } from 'pinia'
 export const useSkillStore = defineStore('skills', {
   state: () => ({
     userSkills: null,
-    skills: null, //all available skills
+    skills: null, //all available skills,
+    skill: null
   }),
   getters: {
     getUserSkills(state) {
@@ -17,7 +18,10 @@ export const useSkillStore = defineStore('skills', {
     getSkills(state) {
       return state.skills
     },
-   
+    getSkill(state) {
+      return state.skill
+    },
+
   },
   actions: {
     setUserSkills() {
@@ -33,11 +37,24 @@ export const useSkillStore = defineStore('skills', {
     //all skills
     setSkills() {
       skillService.getSkillsGrouped().then((response) => {
-        if(response.data){
+        if (response.data) {
           this.skills = response.data
         }
       })
     },
-   
+    setSkill(id) {
+      skillService
+        .getSkillDetails(id)
+        .then((response) => {
+          this.skill = response.data
+          Object.entries(this.skill).forEach((entry) => {
+            this.skill[entry[0]] = entry[1] == 1 ? true : false
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+
   },
 })
