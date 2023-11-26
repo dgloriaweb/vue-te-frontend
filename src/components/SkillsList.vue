@@ -25,7 +25,7 @@ const skillStore = useSkillStore()
 const route = useRouter()
 
 function editSkill(skillId) {
-    route.push("skill/"+skillId)
+    route.push("skills/"+skillId)
 }
 
 </script>
