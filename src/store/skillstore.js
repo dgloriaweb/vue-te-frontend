@@ -47,9 +47,7 @@ export const useSkillStore = defineStore('skills', {
         .getSkillDetails(id)
         .then((response) => {
           this.skill = response.data
-          Object.entries(this.skill).forEach((entry) => {
-            this.skill[entry[0]] = entry[1] == 1 ? true : false
-          })
+          
         })
         .catch((error) => {
           console.log(error)

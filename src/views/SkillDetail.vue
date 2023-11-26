@@ -1,6 +1,6 @@
 <template>
     <div>
-{{ route.params.id }}
+{{ skillStore.skill }}
     </div>
 </template>
 
