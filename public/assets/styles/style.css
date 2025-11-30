@@ -14,19 +14,25 @@ body {
 :root {
   --main-blue: #3fb4dd;
   --secondary-grey: #1986af;
-  --main-light-blue: #cde9f5;
+  --main-light-blue: #e1eef3;
+  --golden-yellow: #F5C042;
+  --warm-orange-red: #D85432;
+  --soft-white-cream: #F2EDE3;
+  --deep-blue-background: #2F4F78;
+  --leaf-green: #4F7A45;
 }
 
 body {
   margin: 0;
   background-color: var(--main-light-blue);
+  color: var(--deep-blue-background);
 }
 
 
 a {
-  text-decoration: none;
   width: fit-content;
-
+  color: var(--deep-blue-background);
+  font-weight: bold;
 }
 
 .wrapper {
@@ -55,7 +61,8 @@ a {
   color: green;
   background-color: rgb(205, 255, 205);
 }
-#myGridContainer {
+
+.myGridContainer {
   width: fit-content;
   display: grid;
   grid-template-columns: 1fr;
@@ -69,21 +76,6 @@ a {
     grid-template-columns: 2fr 2fr 2fr 2fr;
     gap: 35px;
   }
-}
-#myGridContainer {
-  width: fit-content;
-  display: flex;
-  gap: 35px;
-}
-
-#myGridColumn {
-  padding: 15px;
-}
-
-#myGridRow {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  padding-block: 10px;
 }
 
 .grid-cell-1 {
@@ -283,5 +275,8 @@ h6 {
 .job_name {
   font-size: 18px;
   font-weight: 700;
-  color: #333;
+}
+
+#ratesContainer {
+  padding: 1rem 0;
 }
