@@ -66,42 +66,5 @@ class PersonService {
   }
 
 
-  // old code
-  // addSkillToPerson = async (person, skillId) => {
-  //   try {
-  //     const myurl =
-  //       process.env.VUE_APP_API_URL +
-  //       '/api/addPersonSkill/' +
-  //       person.id +
-  //       '/' +
-  //       skillId
-  //     const response = await axios({
-  //       method: 'post',
-  //       url: myurl,
-  //       headers: authService.getApiHeaders(),
-  //     })
-  //     return response
-  //   } catch (error) {
-  //     alert('error in addSkillToPerson: '.error)
-  //   }
-  // }
-  // removeSkillFromPerson = async (person, skillId) => {
-  //   try {
-  //     const myurl =
-  //       process.env.VUE_APP_API_URL +
-  //       '/api/removePersonSkill/' +
-  //       person.id +
-  //       '/' +
-  //       skillId
-  //     const response = await axios({
-  //       method: 'post',
-  //       url: myurl,
-  //       headers: authService.getApiHeaders(),
-  //     })
-  //     return response
-  //   } catch (error) {
-  //     alert('error in removeSkillToPerson: '.error)
-  //   }
-  // }
 }
 export default new PersonService()

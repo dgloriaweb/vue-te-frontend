@@ -95,42 +95,63 @@ function routeHome() {
 this part is tricky, handle with care!!! 
 ************************************* */
 function addSkill(key, skill) {
-
-  var object = {
-    "id": skill["id"],
-    "skill": skill["skill"],
-    "core_skill": key
+  // Initialize userSkills as array if it's null or not an array
+  if (!skillStore.userSkills || !Array.isArray(skillStore.userSkills)) {
+    skillStore.userSkills = [];
   }
-  skillStore.userSkills.push(object)
 
-  //remove item from skills
+  // Check if this skill is already in userSkills (handles many-to-many: skill might be in multiple groups)
+  const skillAlreadyAdded = skillStore.userSkills.some(item => item["id"] === skill["id"])
+  
+  if (!skillAlreadyAdded) {
+    var object = {
+      "id": skill["id"],
+      "skill": skill["skill"],
+      "core_skill": key
+    }
+    skillStore.userSkills.push(object)
+  }
+
+  //remove item from skills (only from the specific core_skill group clicked)
+  // This handles the case where skill appears in multiple groups - we only remove from the one clicked
   var myItem = Object.entries(skillStore.skills).find((item) => item.includes(key)) // find items in this core skill category
-  skillStore.skills[key] = Object.values(myItem[1]).filter((item) => item["id"] != skill["id"]); // filter out the selected one and return remaining
-
+  if (myItem && myItem[1]) {
+    skillStore.skills[key] = Object.values(myItem[1]).filter((item) => item["id"] != skill["id"]); // filter out the selected one and return remaining
+  }
 }
 function removeSkill(userSkill) {
-  console.log(userSkill)
-  var object = {
-    "id": userSkill["id"],
-    "skill": userSkill["skill"],
-    "core_skill": userSkill['core_skill']
-  }
-  // filter out object with this skill id
+  // Remove the skill from userSkills (right-hand list)
   skillStore.userSkills = Object.values(skillStore.userSkills).filter((item) => item["id"] != userSkill["id"])
 
-  // TODO: this breaks the code, need to test how the core_skill can be eliminated
-  // find the corresponding core_skill in the skills
-  // add these data as array item to the skills 
-  // var object = {
-  //   "id": userSkill["id"],
-  //   "skill": userSkill["skill"]
-  // }
-  // 14 has no core skill! Need to fix those which don't have a core skill
-  // skillStore.skills[userSkill["core_skill"]].push(object)
+  // Use masterSkills to find ALL core_skill groups this skill originally belonged to
+  // (handles many-to-many relationship)
+  if (skillStore.masterSkills) {
+    const skillObject = {
+      "id": userSkill["id"],
+      "skill": userSkill["skill"]
+    }
 
-  // add back this skill to the list on the left side
-  skillStore.skills[userSkill['core_skill']].push(object);
-
+    // Loop through all core_skill groups in the master copy
+    for (const [coreSkillKey, skillsArray] of Object.entries(skillStore.masterSkills)) {
+      // Check if this skill exists in this core_skill group in the master copy
+      const skillExistsInMaster = skillsArray.some(skill => skill.id === userSkill["id"])
+      
+      if (skillExistsInMaster) {
+        // Initialize the group in working skills if it doesn't exist
+        if (!skillStore.skills[coreSkillKey]) {
+          skillStore.skills[coreSkillKey] = []
+        }
+        
+        // Check if skill already exists in this group (avoid duplicates)
+        const skillAlreadyExists = skillStore.skills[coreSkillKey].some(skill => skill.id === userSkill["id"])
+        
+        if (!skillAlreadyExists) {
+          // Add the skill back to this core_skill group
+          skillStore.skills[coreSkillKey].push(skillObject)
+        }
+      }
+    }
+  }
 }
 /* *************************************
 this part is tricky, handle with care!!!

@@ -8,7 +8,8 @@ import { defineStore } from 'pinia'
 export const useSkillStore = defineStore('skills', {
   state: () => ({
     userSkills: null,
-    skills: null, //all available skills
+    skills: null, //all available skills (working copy, gets modified)
+    masterSkills: null, //master copy of original skills structure (never modified, used for lookup)
   }),
   getters: {
     getUserSkills(state) {
@@ -35,6 +36,8 @@ export const useSkillStore = defineStore('skills', {
       skillService.getSkillsGrouped().then((response) => {
         if(response.data){
           this.skills = response.data
+          // Create a deep copy for masterSkills (preserve original many-to-many mapping)
+          this.masterSkills = JSON.parse(JSON.stringify(response.data))
         }
       })
     },
